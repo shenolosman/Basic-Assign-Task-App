@@ -2,12 +2,8 @@
 
 namespace So.ToDo.DataAccessLayer.Interfaces
 {
-    public interface IUserDAL
+    public interface IUserDAL : IGenericDAL<User>
     {
-        void Save(User user);
-        void Delete(User user);
-        void Update(User user);
-        User GetById(int id);
-        List<User> GetAll();
+
     }
 }
