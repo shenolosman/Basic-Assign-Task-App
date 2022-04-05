@@ -8,7 +8,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SO.ToDo.BusinessLayer", "SO
 		{62D4E179-6763-4688-946E-D42B9A410198} = {62D4E179-6763-4688-946E-D42B9A410198}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SO.ToDo.DataAccessLayer", "So.ToDo.DataAccessLayer\SO.ToDo.DataAccessLayer.csproj", "{62D4E179-6763-4688-946E-D42B9A410198}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "So.ToDo.DataAccessLayer", "So.ToDo.DataAccessLayer\So.ToDo.DataAccessLayer.csproj", "{62D4E179-6763-4688-946E-D42B9A410198}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3A36F90B-632F-4490-9A40-637A312BA162} = {3A36F90B-632F-4490-9A40-637A312BA162}
 	EndProjectSection
