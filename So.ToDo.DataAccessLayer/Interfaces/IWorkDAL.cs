@@ -4,11 +4,10 @@ namespace So.ToDo.DataAccessLayer.Interfaces
 {
     public interface IWorkDAL
     {
-        void SaveWork(Work work);
-        void DeleteWork(Work work);
-        void UpdateWork(Work work);
-        Work GetWork(int id);
-        Work GetWorkById(int id);
-        List<Work> GetAllWorks();
+        void Save(Work work);
+        void Delete(Work work);
+        void Update(Work work);
+        Work GetById(int id);
+        List<Work> GetAll();
     }
 }
