@@ -1,4 +1,5 @@
-﻿using So.ToDo.DataAccessLayer.Interfaces;
+﻿using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts;
+using So.ToDo.DataAccessLayer.Interfaces;
 using SO.ToDo.Entities.Concrete;
 
 namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
@@ -7,27 +8,35 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
     {
         public void Save(Work work)
         {
-            throw new NotImplementedException();
+            using var context = new ToDoContext();
+            context.Works.Add(work);
+            context.SaveChanges();
         }
 
         public void Delete(Work work)
         {
-            throw new NotImplementedException();
+            using var context = new ToDoContext();
+            context.Works.Remove(work);
+            context.SaveChanges();
         }
 
         public void Update(Work work)
         {
-            throw new NotImplementedException();
+            using var context = new ToDoContext();
+            context.Works.Update(work);
+            context.SaveChanges();
         }
 
         public Work GetById(int id)
         {
-            throw new NotImplementedException();
+            using var context = new ToDoContext();
+            return context.Works.Find(id) ?? throw new InvalidOperationException();
         }
 
         public List<Work> GetAll()
         {
-            throw new NotImplementedException();
+            using var context = new ToDoContext();
+            return context.Works.ToList();
         }
     }
 }
