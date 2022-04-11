@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\So.ToDo.DataAccessLayer\So.ToDo.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\SO.ToDo.Entities\SO.ToDo.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
