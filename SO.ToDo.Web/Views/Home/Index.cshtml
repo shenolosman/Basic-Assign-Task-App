@@ -11,8 +11,12 @@
     <a asp-action="Index">Go Home</a>
 
     <h4> Data from model</h4>
-    @foreach (var item in Model)
+ @*   @foreach (var item in Model)
     {
         <p>@item.Name</p>
-    }
+    }*@
+
+
+
+    @await Component.InvokeAsync("Products")
 </div>

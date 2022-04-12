@@ -20,16 +20,16 @@ namespace SO.ToDo.Web.Controllers
             //can transfer data to next action!
             TempData["Name"] = "Test-TempData";
 
-            var customerlist = new List<CustomerViewModel>()
-            {
-                new (){Name = "Test 1"},
-                new (){Name = "Test 2"},
-                new (){Name = "Test 3"},
-                new (){Name = "Test 4"},
-                new (){Name = "Test 5"},
-                new (){Name = "Test 6"},
-            };
-            return View(customerlist);
+            //var customerlist = new List<CustomerViewModel>()
+            //{
+            //    new (){Name = "Test 1"},
+            //    new (){Name = "Test 2"},
+            //    new (){Name = "Test 3"},
+            //    new (){Name = "Test 4"},
+            //    new (){Name = "Test 5"},
+            //    new (){Name = "Test 6"},
+            //};
+            return View();
         }
 
         public IActionResult Result()
