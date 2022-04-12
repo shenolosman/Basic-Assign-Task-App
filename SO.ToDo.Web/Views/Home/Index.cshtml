@@ -5,4 +5,14 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <MyHelper></MyHelper>
+    @*@Html.Partial("_PartialView")*@  
+    <partial name="_PartialView" />
+    <a asp-action="Index">Go Home</a>
+
+    <h4> Data from model</h4>
+    @foreach (var item in Model)
+    {
+        <p>@item.Name</p>
+    }
 </div>

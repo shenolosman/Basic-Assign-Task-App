@@ -12,11 +12,31 @@ namespace SO.ToDo.Web.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
+        {
+            //can transfer just to view!
+            ViewBag.Name = "Test-Viewbag";
+            ViewData["Name"] = "Test-ViewData";
+            //can transfer data to next action!
+            TempData["Name"] = "Test-TempData";
+
+            var customerlist = new List<CustomerViewModel>()
+            {
+                new (){Name = "Test 1"},
+                new (){Name = "Test 2"},
+                new (){Name = "Test 3"},
+                new (){Name = "Test 4"},
+                new (){Name = "Test 5"},
+                new (){Name = "Test 6"},
+            };
+            return View(customerlist);
+        }
+
+        public IActionResult Result()
         {
             return View();
         }
+
 
         public IActionResult Privacy()
         {
