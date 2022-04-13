@@ -1,3 +1,6 @@
+
+using SO.ToDo.Web.Contraints;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -18,8 +21,13 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapDefaultControllerRoute();
+
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    "MyRoute",
+    "myroute/{language}",
+    new { controller = "Home", action = "Index" },
+    new { language = new MyRouteConstraint() }
+    );
 
 app.Run();
