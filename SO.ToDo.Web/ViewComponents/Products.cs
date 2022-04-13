@@ -14,7 +14,7 @@ namespace SO.ToDo.Web.ViewComponents
                 new (){Name = "Test 3"},
                 new (){Name = "Test 4"},
                 new (){Name = "Test 5"},
-                new (){Name = "Test 6"},
+                new (){Name = "Test 6"}
             });
         }
     }
