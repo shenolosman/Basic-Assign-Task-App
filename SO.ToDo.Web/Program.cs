@@ -30,6 +30,8 @@ app.MapControllerRoute(
     new { language = new MyRouteConstraint() }
     );
 
+
+//To call all areas 
 app.MapControllerRoute(
     "areas",
     "{area}/{controller=Home}/{action=Index}/{id?}"

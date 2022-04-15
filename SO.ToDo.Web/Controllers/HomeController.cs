@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SO.ToDo.Web.CustomFilters;
 using SO.ToDo.Web.Models;
 using System.Diagnostics;
 
@@ -20,23 +21,28 @@ namespace SO.ToDo.Web.Controllers
             //can transfer data to next action!
             TempData["Name"] = "Test-TempData";
 
-            //var customerlist = new List<CustomerViewModel>()
-            //{
-            //    new (){Name = "Test 1"},
-            //    new (){Name = "Test 2"},
-            //    new (){Name = "Test 3"},
-            //    new (){Name = "Test 4"},
-            //    new (){Name = "Test 5"},
-            //    new (){Name = "Test 6"},
-            //};
             return View();
         }
 
-        public IActionResult Result()
+        public IActionResult Register()
         {
             return View();
         }
+        [ActionName("Register")]
+        [MyCustomFilters]
+        [HttpPost]
+        public IActionResult RegisterConfirm(UserRegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
 
+                // Do some work
+            }
+            //server-side validation!
+            //ModelState.AddModelError(nameof(UserRegisterViewModel.Name), "User Name is Required!");
+
+            return View(nameof(Register));
+        }
 
         public IActionResult Privacy()
         {
