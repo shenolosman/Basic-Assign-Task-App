@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.Web.CustomExtension;
 using SO.ToDo.Web.CustomFilters;
+using SO.ToDo.Web.CustomLogger;
 using SO.ToDo.Web.Models;
 
 namespace SO.ToDo.Web.Controllers
@@ -58,6 +59,11 @@ namespace SO.ToDo.Web.Controllers
         public IActionResult Error()
         {
             var exceptionHandlarPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            //adding my custom logger file here
+            NLogLogger nlogLogger = new NLogLogger();
+            nlogLogger.LogWithNLog($"The error occoured place is { exceptionHandlarPathFeature.Path}\n Message is: {exceptionHandlarPathFeature.Error.Message} \n Stack Trace is: {exceptionHandlarPathFeature.Error.StackTrace}");
+
             ViewBag.Path = exceptionHandlarPathFeature.Path;
             ViewBag.Message = exceptionHandlarPathFeature.Error.Message;
             // return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
