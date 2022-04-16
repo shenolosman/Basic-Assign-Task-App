@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.Web.CustomExtension;
 using SO.ToDo.Web.CustomFilters;
 using SO.ToDo.Web.Models;
-using System.Diagnostics;
 
 namespace SO.ToDo.Web.Controllers
 {
@@ -57,9 +57,17 @@ namespace SO.ToDo.Web.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var exceptionHandlarPathFeature = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            ViewBag.Path = exceptionHandlarPathFeature.Path;
+            ViewBag.Message = exceptionHandlarPathFeature.Error.Message;
+            // return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View();
         }
 
+        public IActionResult MakeError()
+        {
+            throw new Exception("Error throwed!");
+        }
         public IActionResult PageError(int? code)
         {
             ViewBag.Code = code;
