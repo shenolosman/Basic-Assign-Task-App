@@ -19,6 +19,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
+//Creating status code errors page!!!
+//app.UseStatusCodePages();
+app.UseStatusCodePagesWithReExecute("/Home/PageError", "?code={0}");
+
 app.UseSession();
 
 app.UseAuthorization();

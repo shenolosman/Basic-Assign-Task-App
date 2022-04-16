@@ -60,6 +60,13 @@ namespace SO.ToDo.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        public IActionResult PageError(int? code)
+        {
+            ViewBag.Code = code;
+            if (code == 404)
+                ViewBag.Message = "Page Not Found";
+            return View();
+        }
         //client side
         public void SetCookie()
         {
