@@ -14,7 +14,7 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new Mapping.MyTask());
+            modelBuilder.ApplyConfiguration(new Mapping.MyTaskMap());
             base.OnModelCreating(modelBuilder);
         }
 

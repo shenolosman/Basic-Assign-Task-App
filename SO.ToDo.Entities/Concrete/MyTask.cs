@@ -9,5 +9,8 @@ namespace SO.ToDo.Entities.Concrete
         public string Description { get; set; }
         public DateTime CreatedTime { get; set; }
         public bool IsDone { get; set; }
+
+        public int? AppUserId { get; set; }
+        public AppUser AppUser { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Mapping
 {
-    public class MyTask : IEntityTypeConfiguration<SO.ToDo.Entities.Concrete.MyTask>
+    public class MyTaskMap : IEntityTypeConfiguration<SO.ToDo.Entities.Concrete.MyTask>
     {
         public void Configure(EntityTypeBuilder<SO.ToDo.Entities.Concrete.MyTask> builder)
         {
