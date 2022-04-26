@@ -1,6 +1,8 @@
-﻿namespace SO.ToDo.Entities.Concrete
+﻿using SO.ToDo.Entities.Interfaces;
+
+namespace SO.ToDo.Entities.Concrete
 {
-    public class Rapport
+    public class Rapport : ITable
     {
         public int Id { get; set; }
         public string Defination { get; set; }

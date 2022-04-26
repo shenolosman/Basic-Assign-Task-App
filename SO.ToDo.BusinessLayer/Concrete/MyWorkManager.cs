@@ -4,7 +4,7 @@ using SO.ToDo.Entities.Concrete;
 
 namespace SO.ToDo.BusinessLayer.Concrete
 {
-    internal class MyWorkManager : IMyTaskService
+    public class MyWorkManager : IMyTaskService
     {
         private readonly EfMyTaskRepository _efWorkRepository;
 
