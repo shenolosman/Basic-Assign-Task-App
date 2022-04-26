@@ -4,35 +4,35 @@ using SO.ToDo.Entities.Concrete;
 
 namespace SO.ToDo.BusinessLayer.Concrete
 {
-    internal class MyWorkManager : IWorkService
+    internal class MyWorkManager : IMyTaskService
     {
-        private readonly EfWorkRepository _efWorkRepository;
+        private readonly EfMyTaskRepository _efWorkRepository;
 
-        public MyWorkManager(EfWorkRepository efWorkRepository)
+        public MyWorkManager(EfMyTaskRepository efWorkRepository)
         {
             _efWorkRepository = efWorkRepository;
         }
-        public void Add(Work table)
+        public void Add(MyTask table)
         {
             _efWorkRepository.Save(table);
         }
 
-        public void Remove(Work table)
+        public void Remove(MyTask table)
         {
             _efWorkRepository.Delete(table);
         }
 
-        public void Update(Work table)
+        public void Update(MyTask table)
         {
             _efWorkRepository.Update(table);
         }
 
-        public Work GetById(int id)
+        public MyTask GetById(int id)
         {
             return _efWorkRepository.GetById(id);
         }
 
-        public List<Work> GetAll()
+        public List<MyTask> GetAll()
         {
             return _efWorkRepository.GetAll();
         }

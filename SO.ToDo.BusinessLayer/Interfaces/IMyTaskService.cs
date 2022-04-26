@@ -2,7 +2,7 @@
 
 namespace SO.ToDo.BusinessLayer.Interfaces
 {
-    internal interface IUserService : IGenericService<User>
+    internal interface IMyTaskService : IGenericService<MyTask>
     {
     }
 }

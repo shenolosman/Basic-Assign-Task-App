@@ -2,7 +2,7 @@
 
 namespace So.ToDo.DataAccessLayer.Interfaces
 {
-    public interface IWorkDAL : IGenericDAL<Work>
+    public interface IMyTaskDAL : IGenericDAL<MyTask>
     {
 
     }

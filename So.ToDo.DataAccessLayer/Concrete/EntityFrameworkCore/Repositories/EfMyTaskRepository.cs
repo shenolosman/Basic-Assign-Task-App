@@ -3,7 +3,7 @@ using SO.ToDo.Entities.Concrete;
 
 namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
 {
-    public class EfWorkRepository : EfGenericRepository<Work>, IWorkDAL
+    public class EfMyTaskRepository : EfGenericRepository<MyTask>, IMyTaskDAL
     {
 
     }
