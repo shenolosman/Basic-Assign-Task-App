@@ -14,6 +14,8 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Mapping
 
             builder.Property(x => x.Description).HasColumnType("ntext");
 
+            builder.HasOne(x => x.StateOfUrgent).WithMany(x => x.MyTasks).HasForeignKey(x => x.StateOfUrgentId);
+
         }
     }
 }

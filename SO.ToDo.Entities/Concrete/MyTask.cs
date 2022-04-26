@@ -12,5 +12,8 @@ namespace SO.ToDo.Entities.Concrete
 
         public int? AppUserId { get; set; }
         public AppUser AppUser { get; set; }
+
+        public int StateOfUrgentId { get; set; }
+        public StateOfUrgent StateOfUrgent { get; set; }
     }
 }

@@ -19,5 +19,6 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts
         }
 
         public DbSet<MyTask> MyTasks { get; set; }
+        public DbSet<StateOfUrgent> StateOfUrgents { get; set; }
     }
 }
