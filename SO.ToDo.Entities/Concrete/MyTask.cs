@@ -11,9 +11,11 @@ namespace SO.ToDo.Entities.Concrete
         public bool IsDone { get; set; }
 
         public int? AppUserId { get; set; }
-        public AppUser AppUser { get; set; }
+        public AppUser? AppUser { get; set; }
 
         public int StateOfUrgentId { get; set; }
         public StateOfUrgent StateOfUrgent { get; set; }
+
+        public List<Rapport> Rapports { get; set; }
     }
 }

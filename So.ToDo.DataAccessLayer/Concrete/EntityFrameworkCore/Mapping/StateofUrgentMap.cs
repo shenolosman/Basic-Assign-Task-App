@@ -8,6 +8,8 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Mapping
     {
         public void Configure(EntityTypeBuilder<StateOfUrgent> builder)
         {
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.Type).HasMaxLength(100);
         }
     }

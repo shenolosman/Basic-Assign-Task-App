@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts;
 
@@ -11,9 +12,10 @@ using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts;
 namespace So.ToDo.DataAccessLayer.Migrations
 {
     [DbContext(typeof(ToDoContext))]
-    partial class ToDoContextModelSnapshot : ModelSnapshot
+    [Migration("20220426203223_StateofUrgentMyTaskER")]
+    partial class StateofUrgentMyTaskER
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,8 +187,7 @@ namespace So.ToDo.DataAccessLayer.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -210,8 +211,7 @@ namespace So.ToDo.DataAccessLayer.Migrations
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
@@ -271,33 +271,6 @@ namespace So.ToDo.DataAccessLayer.Migrations
                     b.ToTable("MyTasks");
                 });
 
-            modelBuilder.Entity("SO.ToDo.Entities.Concrete.Rapport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Defination")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasColumnType("ntext");
-
-                    b.Property<int>("MyTaskId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MyTaskId");
-
-                    b.ToTable("Rapports");
-                });
-
             modelBuilder.Entity("SO.ToDo.Entities.Concrete.StateOfUrgent", b =>
                 {
                     b.Property<int>("Id")
@@ -308,8 +281,7 @@ namespace So.ToDo.DataAccessLayer.Migrations
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -384,25 +356,9 @@ namespace So.ToDo.DataAccessLayer.Migrations
                     b.Navigation("StateOfUrgent");
                 });
 
-            modelBuilder.Entity("SO.ToDo.Entities.Concrete.Rapport", b =>
-                {
-                    b.HasOne("SO.ToDo.Entities.Concrete.MyTask", "MyTask")
-                        .WithMany("Rapports")
-                        .HasForeignKey("MyTaskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MyTask");
-                });
-
             modelBuilder.Entity("SO.ToDo.Entities.Concrete.AppUser", b =>
                 {
                     b.Navigation("MyTasks");
-                });
-
-            modelBuilder.Entity("SO.ToDo.Entities.Concrete.MyTask", b =>
-                {
-                    b.Navigation("Rapports");
                 });
 
             modelBuilder.Entity("SO.ToDo.Entities.Concrete.StateOfUrgent", b =>
