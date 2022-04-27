@@ -1,4 +1,4 @@
-﻿using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories;
+﻿using So.ToDo.DataAccessLayer.Interfaces;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.Entities.Concrete;
 
@@ -6,35 +6,35 @@ namespace SO.ToDo.BusinessLayer.Concrete
 {
     public class RapportManager : IRapportService
     {
-        private readonly EfRapportRepository _rapportRepository;
+        private readonly IRapportDal _rapportDal;
 
-        public RapportManager(EfRapportRepository rapportRepository)
+        public RapportManager(IRapportDal rapportDal)
         {
-            _rapportRepository = rapportRepository;
+            _rapportDal = rapportDal;
         }
         public void Add(Rapport table)
         {
-            _rapportRepository.Save(table);
+            _rapportDal.Save(table);
         }
 
         public void Remove(Rapport table)
         {
-            _rapportRepository.Delete(table);
+            _rapportDal.Delete(table);
         }
 
         public void Update(Rapport table)
         {
-            _rapportRepository.Update(table);
+            _rapportDal.Update(table);
         }
 
         public Rapport GetById(int id)
         {
-            return _rapportRepository.GetById(id);
+            return _rapportDal.GetById(id);
         }
 
         public List<Rapport> GetAll()
         {
-            return _rapportRepository.GetAll();
+            return _rapportDal.GetAll();
         }
     }
 }

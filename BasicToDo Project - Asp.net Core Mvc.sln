@@ -3,19 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32228.430
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SO.ToDo.BusinessLayer", "SO.ToDo.BusinessLayer\SO.ToDo.BusinessLayer.csproj", "{51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SO.ToDo.BusinessLayer", "SO.ToDo.BusinessLayer\SO.ToDo.BusinessLayer.csproj", "{51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB}"
 	ProjectSection(ProjectDependencies) = postProject
 		{62D4E179-6763-4688-946E-D42B9A410198} = {62D4E179-6763-4688-946E-D42B9A410198}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "So.ToDo.DataAccessLayer", "So.ToDo.DataAccessLayer\So.ToDo.DataAccessLayer.csproj", "{62D4E179-6763-4688-946E-D42B9A410198}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "So.ToDo.DataAccessLayer", "So.ToDo.DataAccessLayer\So.ToDo.DataAccessLayer.csproj", "{62D4E179-6763-4688-946E-D42B9A410198}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3A36F90B-632F-4490-9A40-637A312BA162} = {3A36F90B-632F-4490-9A40-637A312BA162}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SO.ToDo.Entities", "SO.ToDo.Entities\SO.ToDo.Entities.csproj", "{3A36F90B-632F-4490-9A40-637A312BA162}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SO.ToDo.Entities", "SO.ToDo.Entities\SO.ToDo.Entities.csproj", "{3A36F90B-632F-4490-9A40-637A312BA162}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SO.ToDo.Web", "SO.ToDo.Web\SO.ToDo.Web.csproj", "{D9BB2288-B239-45CD-BAC8-0CC0E3364C88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SO.ToDo.Web", "SO.ToDo.Web\SO.ToDo.Web.csproj", "{D9BB2288-B239-45CD-BAC8-0CC0E3364C88}"
+	ProjectSection(ProjectDependencies) = postProject
+		{51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB} = {51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SO.ToDo.WebAPP", "SO.ToDo.WebAPP\SO.ToDo.WebAPP.csproj", "{F65B1487-E98E-42BA-96B2-3A0E79389BD2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB} = {51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB}
 	EndProjectSection
@@ -42,6 +47,10 @@ Global
 		{D9BB2288-B239-45CD-BAC8-0CC0E3364C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9BB2288-B239-45CD-BAC8-0CC0E3364C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9BB2288-B239-45CD-BAC8-0CC0E3364C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F65B1487-E98E-42BA-96B2-3A0E79389BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F65B1487-E98E-42BA-96B2-3A0E79389BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F65B1487-E98E-42BA-96B2-3A0E79389BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F65B1487-E98E-42BA-96B2-3A0E79389BD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

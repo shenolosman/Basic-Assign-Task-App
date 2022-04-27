@@ -1,4 +1,4 @@
-﻿using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories;
+﻿using So.ToDo.DataAccessLayer.Interfaces;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.Entities.Concrete;
 
@@ -6,35 +6,35 @@ namespace SO.ToDo.BusinessLayer.Concrete
 {
     public class StateOfUrgentManager : IStateOfUrgentService
     {
-        private readonly EfStateOfUrgentRepository _stateOfUrgentRepository;
+        private readonly IStateOfUrgentDal _stateOfUrgentDal;
 
-        public StateOfUrgentManager(EfStateOfUrgentRepository stateOfUrgentRepository)
+        public StateOfUrgentManager(IStateOfUrgentDal stateOfUrgentDal)
         {
-            _stateOfUrgentRepository = stateOfUrgentRepository;
+            _stateOfUrgentDal = stateOfUrgentDal;
         }
         public void Add(StateOfUrgent table)
         {
-            _stateOfUrgentRepository.Save(table);
+            _stateOfUrgentDal.Save(table);
         }
 
         public void Remove(StateOfUrgent table)
         {
-            _stateOfUrgentRepository.Delete(table);
+            _stateOfUrgentDal.Delete(table);
         }
 
         public void Update(StateOfUrgent table)
         {
-            _stateOfUrgentRepository.Update(table);
+            _stateOfUrgentDal.Update(table);
         }
 
         public StateOfUrgent GetById(int id)
         {
-            return _stateOfUrgentRepository.GetById(id);
+            return _stateOfUrgentDal.GetById(id);
         }
 
         public List<StateOfUrgent> GetAll()
         {
-            return _stateOfUrgentRepository.GetAll();
+            return _stateOfUrgentDal.GetAll();
         }
     }
 }
