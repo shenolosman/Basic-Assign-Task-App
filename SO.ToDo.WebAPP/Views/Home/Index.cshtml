@@ -1,13 +1,30 @@
-﻿
+﻿@model AppUserAddViewModel
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_StandartLayout.cshtml";
+    ViewData["Title"] = "Login";
 }
-
-    <h1>Index</h1>
-     <hr/>
-
-    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-outline-dark">Admin Sayfasina Git</a>
-
+<div class="w-50 mx-auto">
+    <h1>Login</h1>
     <a asp-area="Member" class="btn btn-outline-primary">Member Sayfasina Git</a>
+    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-outline-dark">Admin Sayfasina Git</a>
+</div>
+<hr/>
+<br/>
+<form class="w-50 mx-auto shadow" method="post" style="padding: 10px 10px">
+    <div class="mb-2" style="padding: 0 10px">
+        <label asp-for="Username" class="form-label"></label>
+        <span asp-validation-for="Username" class="text-danger"></span>
+        <input asp-for="Username" type="text" class="form-control"/>
+    </div>
+    <div class="mb-2" style="padding: 0 10px">
+        <label asp-for="Password" class="form-label"></label>
+        <span asp-validation-for="Password" class="text-danger"></span>
+        <input asp-for="Password" type="text" class="form-control"/>
+    </div>
+  
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <button type="submit" class="btn btn-primary btn-block">Login</button>
+</form>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

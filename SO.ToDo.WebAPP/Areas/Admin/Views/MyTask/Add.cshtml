@@ -21,9 +21,9 @@
         <span asp-validation-for="StateOfUrgentId" class="text-danger"></span>
         <select asp-for="StateOfUrgentId" class="form-control form-control-lg" asp-items="ViewBag.States">
             <option hidden="true"  value="-1">Select</option>
-            
         </select>
     </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <button type="submit" class="btn btn-primary btn-lg">Add</button>
 </form>
 

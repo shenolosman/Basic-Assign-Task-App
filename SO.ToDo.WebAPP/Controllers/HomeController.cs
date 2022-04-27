@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.BusinessLayer.Interfaces;
+using SO.ToDo.WebAPP.Models;
 
 namespace SO.ToDo.WebAPP.Controllers
 {
@@ -12,6 +13,16 @@ namespace SO.ToDo.WebAPP.Controllers
             _myTaskService = myTaskService;
         }
         public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Register()
+        {
+            return View(new AppUserAddViewModel());
+        }
+        [HttpPost]
+        public IActionResult Register(AppUserAddViewModel model)
         {
             return View();
         }

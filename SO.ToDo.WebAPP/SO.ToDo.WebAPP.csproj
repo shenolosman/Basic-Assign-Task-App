@@ -15,7 +15,6 @@
     <Folder Include="Areas\Member\Data\" />
     <Folder Include="Areas\Member\Models\" />
     <Folder Include="wwwroot\Template\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>

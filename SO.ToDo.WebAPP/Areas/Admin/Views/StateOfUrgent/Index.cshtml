@@ -1,12 +1,16 @@
 ﻿@model List<StateOfUrgentListViewModel>
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Index";
 }
-
 <h1>State of urgent</h1>
-
-
-@if (Model.Count > 0)
+@if (Model.Count == 0)
+{
+    <div class="p-3 text-center mt-3">
+        <p class="lead">No Item to show</p>
+        <a asp-action="Add" asp-controller="StateOfUrgent" class="btn btn-sm btn-info my-2">Add new</a>
+    </div>
+}
+else
 {
     <a asp-action="Add" asp-controller="StateOfUrgent" class="btn btn-sm btn-info my-2">Add new</a>
     <table class="table table-sm table-hover w-50 mx-auto">
@@ -28,12 +32,4 @@
             }
         </tbody>
     </table>
-}
-else
-{
-    <div class="text-center mt-4">
-        <p class="lead">No Item to show</p>
-        <a asp-action="Add" asp-controller="StateOfUrgent" class="btn btn-sm btn-info my-2">Add new</a>
-    </div>
-
 }
