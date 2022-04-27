@@ -63,7 +63,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         {
             TempData["Active"] = "MyTask";
             var task = _myTaskService.GetById(id);
-            MyTaskUpdateVievModel model = new MyTaskUpdateVievModel
+            var model = new MyTaskUpdateVievModel
             {
                 Id = task.Id,
                 StateOfUrgentId = task.StateOfUrgentId,
@@ -89,17 +89,10 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
             }
             return View(model);
         }
-
         public IActionResult Delete(int id)
         {
-            //var task = _myTaskService.GetById(id);
             _myTaskService.Delete(new MyTask { Id = id });
             return Json(null);
         }
-        //[HttpPost]
-        //public IActionResult Delete(MyTaskDeleteVievModel model)
-        //{
-        //    return View();
-        //}
     }
 }

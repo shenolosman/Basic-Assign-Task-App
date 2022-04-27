@@ -53,6 +53,10 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}"
     );
+    //endpoints.MapControllerRoute(
+    //    "mytaskDelete",
+    //"{area}/{controller=MyTask}/{action=Delete}/{id?}"
+    //);
 });
 
 app.Run();
