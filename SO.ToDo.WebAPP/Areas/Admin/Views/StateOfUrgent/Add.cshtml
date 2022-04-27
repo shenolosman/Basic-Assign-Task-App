@@ -1,7 +1,6 @@
 ﻿@model StateOfUrgentAddViewModel
 @{
     ViewData["Title"] = "Add";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h1>Add</h1>
@@ -15,3 +14,7 @@
     
     <button type="submit" class="btn btn-primary btn-lg">Save</button>
 </form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
