@@ -6,7 +6,7 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
 {
     public class EfGenericRepository<EfRepository> : IGenericDAL<EfRepository> where EfRepository : class, ITable, new()
     {
-        public void Save(EfRepository repo)
+        public void Add(EfRepository repo)
         {
             using var context = new ToDoContext();
             context.Set<EfRepository>().Add(repo);

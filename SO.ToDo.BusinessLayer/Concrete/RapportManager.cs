@@ -14,15 +14,15 @@ namespace SO.ToDo.BusinessLayer.Concrete
         }
         public void Add(Rapport table)
         {
-            _rapportDal.Save(table);
+            _rapportDal.Add(table);
         }
 
-        public void Remove(Rapport table)
+        public void Delete(Rapport table)
         {
             _rapportDal.Delete(table);
         }
 
-        public void Update(Rapport table)
+        public void Edit(Rapport table)
         {
             _rapportDal.Update(table);
         }

@@ -16,6 +16,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
+            TempData["Active"] = "StateOfUrgent";
             var list = _stateOfUrgentService.GetAll();
 
             var model = new List<StateOfUrgentListViewModel>();
@@ -26,7 +27,6 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
                     Id = item.Id,
                     Type = item.Type
                 };
-
                 model.Add(modelItem);
             }
             return View(model);
@@ -34,17 +34,40 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
 
         public IActionResult Add()
         {
+            TempData["Active"] = "StateOfUrgent";
             return View(new StateOfUrgentAddViewModel());
         }
         [HttpPost]
         public IActionResult Add(StateOfUrgentAddViewModel model)
         {
-
             if (ModelState.IsValid)
             {
                 _stateOfUrgentService.Add(new StateOfUrgent() { Type = model.Type });
                 return RedirectToAction(nameof(Index));
             }
+            return View(model);
+        }
+        public IActionResult Edit(int id)
+        {
+            TempData["Active"] = "StateOfUrgent";
+            var state = _stateOfUrgentService.GetById(id);
+            var model = new StateOfUrgentUpdateViewModel { Id = state.Id, Type = state.Type };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(StateOfUrgentUpdateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _stateOfUrgentService.Edit(new StateOfUrgent()
+                {
+                    Id = model.Id,
+                    Type = model.Type
+                });
+                return RedirectToAction(nameof(Index));
+            }
+
             return View(model);
         }
     }

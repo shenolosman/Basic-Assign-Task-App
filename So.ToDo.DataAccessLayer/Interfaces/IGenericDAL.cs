@@ -4,7 +4,7 @@ namespace So.ToDo.DataAccessLayer.Interfaces
 {
     public interface IGenericDAL<TEntityObj> where TEntityObj : class, ITable, new()
     {
-        void Save(TEntityObj work);
+        void Add(TEntityObj work);
         void Delete(TEntityObj work);
         void Update(TEntityObj work);
         TEntityObj GetById(int id);

@@ -14,15 +14,15 @@ namespace SO.ToDo.BusinessLayer.Concrete
         }
         public void Add(MyTask table)
         {
-            _myTaskDal.Save(table);
+            _myTaskDal.Add(table);
         }
 
-        public void Remove(MyTask table)
+        public void Delete(MyTask table)
         {
             _myTaskDal.Delete(table);
         }
 
-        public void Update(MyTask table)
+        public void Edit(MyTask table)
         {
             _myTaskDal.Update(table);
         }
@@ -35,6 +35,11 @@ namespace SO.ToDo.BusinessLayer.Concrete
         public List<MyTask> GetAll()
         {
             return _myTaskDal.GetAll();
+        }
+
+        public Task<List<MyTask>> GetUnDoneStatesofUrgent()
+        {
+            return _myTaskDal.GetUnDoneStatesofUrgent();
         }
     }
 }

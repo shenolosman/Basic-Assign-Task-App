@@ -1,18 +1,17 @@
-﻿@model StateOfUrgentAddViewModel
+﻿@model StateOfUrgentUpdateViewModel
 @{
-    ViewData["Title"] = "Add";
+    ViewBag.Title = "Edit";
 }
-
-<h1>Add</h1>
-
-<form class="w-50 mx-auto" method="post" >
+<h1>Edit State</h1>
+<form class="w-75 mx-auto p-3" method="post">
+    <input type="hidden" asp-for="Id"/>
     <div class="mb-5">
         <label asp-for="Type" class="form-label col-form-label-lg"></label>
         <span asp-validation-for="Type" class="text-danger"></span>
         <input asp-for="Type" type="text" class="form-control form-control-lg"/>
     </div>
     
-    <button type="submit" class="btn btn-primary btn-lg">Add</button>
+    <button type="submit" class="btn btn-primary btn-lg">Edit</button>
 </form>
 
 @section Scripts {

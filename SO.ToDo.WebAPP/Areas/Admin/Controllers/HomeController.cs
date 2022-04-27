@@ -7,6 +7,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
     {
         public IActionResult Index()
         {
+            TempData["Active"] = "Home";
             return View();
         }
     }

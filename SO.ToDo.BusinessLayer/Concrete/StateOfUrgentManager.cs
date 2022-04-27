@@ -14,15 +14,15 @@ namespace SO.ToDo.BusinessLayer.Concrete
         }
         public void Add(StateOfUrgent table)
         {
-            _stateOfUrgentDal.Save(table);
+            _stateOfUrgentDal.Add(table);
         }
 
-        public void Remove(StateOfUrgent table)
+        public void Delete(StateOfUrgent table)
         {
             _stateOfUrgentDal.Delete(table);
         }
 
-        public void Update(StateOfUrgent table)
+        public void Edit(StateOfUrgent table)
         {
             _stateOfUrgentDal.Update(table);
         }

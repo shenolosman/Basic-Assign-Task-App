@@ -7,7 +7,7 @@ namespace SO.ToDo.Entities.Concrete
         public int Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public DateTime CreatedTime { get; set; }
+        public DateTime CreatedTime { get; set; } = DateTime.Now;
         public bool IsDone { get; set; }
 
         public int? AppUserId { get; set; }

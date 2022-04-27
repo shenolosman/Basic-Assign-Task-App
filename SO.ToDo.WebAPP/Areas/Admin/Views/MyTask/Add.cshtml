@@ -1,0 +1,32 @@
+﻿@model MyTaskAddViewModel
+@{ViewBag.Title="Add Task";}
+
+<h1>Add</h1>
+
+<form class="w-50 mx-auto" method="post" >
+    <div class="mb-5">
+        <label asp-for="Title" class="form-label col-form-label-lg"></label>
+        <span asp-validation-for="Title" class="text-danger"></span>
+        <input asp-for="Title" type="text" class="form-control form-control-lg"/>
+    </div>
+    
+    <div class="mb-5">
+        <label asp-for="Description" class="form-label col-form-label-lg"></label>
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <textarea asp-for="Description" type="text" class="form-control form-control-lg"></textarea>
+    </div>
+
+    <div class="mb-5">
+        <label asp-for="StateOfUrgentId" class="form-label col-form-label-lg"></label>
+        <span asp-validation-for="StateOfUrgentId" class="text-danger"></span>
+        <select asp-for="StateOfUrgentId" class="form-control form-control-lg" asp-items="ViewBag.States">
+            <option hidden="true"  value="-1">Select</option>
+            
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Add</button>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

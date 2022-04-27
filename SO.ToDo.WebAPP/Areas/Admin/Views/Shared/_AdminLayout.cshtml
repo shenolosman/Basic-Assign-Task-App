@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+
+    string? active = TempData["Active"]?.ToString();
+}
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -26,9 +30,9 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Admin Layout</div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action active">My Tasks</a>
-        <a asp-area="Admin" asp-controller="StateOfUrgent" asp-action="Index" class="list-group-item list-group-item-action ">States of urgent</a>
-        <a href="#" class="list-group-item list-group-item-action ">Overview</a>
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index"  class="list-group-item list-group-item-action @(active=="Home"?"active":"")">Index of Admin</a>
+        <a asp-area="Admin" asp-controller="StateOfUrgent" asp-action="Index" class="list-group-item list-group-item-action @(active=="StateOfUrgent"?"active":"")" >States of urgent</a>
+        <a asp-area="Admin" asp-controller="MyTask" asp-action="Index"  class="list-group-item list-group-item-action @(active=="MyTask"?"active":"")">My Task</a>
         <a href="#" class="list-group-item list-group-item-action ">Events</a>
         <a href="#" class="list-group-item list-group-item-action ">Profile</a>
         <a href="#" class="list-group-item list-group-item-action ">Status</a>
@@ -40,7 +44,7 @@
     <div id="page-content-wrapper">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+        <button class="btn btn-light" id="menu-toggle">Toggle Menu</button>
 @*
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
