@@ -2,14 +2,16 @@
 @{
     ViewData["Title"] = "Register";
 }
-
-<h1  class="w-50 mx-auto">Register User</h1>
-
+<div class="w-50 mx-auto">
+    <h1>Register User</h1>
+</div>
+<hr/>
+<br/>
 <form class="w-50 mx-auto shadow" method="post" style="padding: 10px 10px">
     <div class="mb-2" style="padding: 0 10px">
         <label asp-for="Name" class="form-label"></label>
-        <span asp-validation-for="Name" class="text-danger"></span>
-        <input asp-for="Name" type="text" class="form-control"/>
+        <span asp-validation-for="Name" class="text-danger" ></span>
+        <input asp-for="Name" type="text" class="form-control"  />
     </div>
     <div class="mb-2" style="padding: 0 10px">
         <label asp-for="Surname" class="form-label"></label>
@@ -19,22 +21,22 @@
     <div class="mb-2" style="padding: 0 10px">
         <label asp-for="Username" class="form-label"></label>
         <span asp-validation-for="Username" class="text-danger"></span>
-        <input asp-for="Username" type="text" class="form-control"/>
+        <input asp-for="Username" type="text" class="form-control" autocomplete="name"/>
     </div>
     <div class="mb-2" style="padding: 0 10px">
         <label asp-for="Email" class="form-label"></label>
         <span asp-validation-for="Email" class="text-danger"></span>
-        <input asp-for="Email" type="text" class="form-control"/>
+        <input asp-for="Email" type="email" class="form-control" autocomplete="username"/>
     </div>
     <div class="mb-2" style="padding: 0 10px">
         <label asp-for="Password" class="form-label"></label>
         <span asp-validation-for="Password" class="text-danger"></span>
-        <input asp-for="Password" type="text" class="form-control"/>
+        <input asp-for="Password" type="password" class="form-control" autocomplete="password"/>
     </div>
     <div class="mb-2" style="padding: 0 10px">
         <label asp-for="RePassword" class="form-label"></label>
         <span asp-validation-for="RePassword" class="text-danger"></span>
-        <input asp-for="RePassword" type="text" class="form-control"/>
+        <input asp-for="RePassword" type="password" class="form-control" autocomplete="password"/>
     </div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <button type="submit" class="btn btn-primary btn-block">Create</button>

@@ -23,6 +23,15 @@ builder.Services.AddDbContext<ToDoContext>();
 
 builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ToDoContext>();
 
+builder.Services.ConfigureApplicationCookie(o =>
+{
+    o.Cookie.Name = "TodoAppCookie";
+    o.Cookie.SameSite = SameSiteMode.Strict;
+    o.Cookie.HttpOnly = true;
+    o.ExpireTimeSpan = TimeSpan.FromDays(30);
+    o.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+    o.LoginPath = "/Home/Index";
+});
 
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
@@ -40,7 +49,7 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
