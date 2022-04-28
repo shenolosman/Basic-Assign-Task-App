@@ -41,5 +41,10 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _myTaskDal.GetUnDoneStatesofUrgent();
         }
+
+        public Task<List<MyTask>> GetAllTables()
+        {
+            return _myTaskDal.GetAllTables();
+        }
     }
 }

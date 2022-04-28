@@ -34,7 +34,7 @@
                 <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")">Index of Admin</a>
                 <a asp-area="Admin" asp-controller="StateOfUrgent" asp-action="Index" class="list-group-item list-group-item-action @(active=="StateOfUrgent"?"active":"")">States of urgent</a>
                 <a asp-area="Admin" asp-controller="MyTask" asp-action="Index" class="list-group-item list-group-item-action @(active=="MyTask"?"active":"")">My Task</a>
-                <a href="#" class="list-group-item list-group-item-action @(active=="Assignment"?"active":"")">Assignment</a>
+                <a asp-area="Admin" asp-controller="Assignment" asp-action="Index" class="list-group-item list-group-item-action @(active=="Assignment"?"active":"")">Assignment</a>
                 <a href="#" class="list-group-item list-group-item-action ">Profile</a>
                 <a href="#" class="list-group-item list-group-item-action ">Status</a>
             </div>

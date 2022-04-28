@@ -5,5 +5,6 @@ namespace So.ToDo.DataAccessLayer.Interfaces
     public interface IMyTaskDAL : IGenericDAL<MyTask>
     {
         Task<List<MyTask>> GetUnDoneStatesofUrgent();
+        Task<List<MyTask>> GetAllTables();
     }
 }
