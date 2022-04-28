@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Identity;
 using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts;
 using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories;
 using So.ToDo.DataAccessLayer.Interfaces;
 using SO.ToDo.BusinessLayer.Concrete;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,6 +36,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -53,5 +56,14 @@ app.UseEndpoints(endpoints =>
         pattern: "{controller=Home}/{action=Index}/{id?}"
     );
 });
+
+using (var scope = app.Services.CreateScope())
+{
+    var userManager = scope.ServiceProvider
+        .GetRequiredService<UserManager<AppUser>>();
+    var roleManager = scope.ServiceProvider
+        .GetRequiredService<RoleManager<AppRole>>();
+    IdentityInitializer.SeedData(userManager, roleManager).Wait();
+}
 
 app.Run();
