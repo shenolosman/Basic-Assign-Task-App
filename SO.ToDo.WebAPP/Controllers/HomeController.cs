@@ -89,5 +89,12 @@ namespace SO.ToDo.WebAPP.Controllers
             }
             return View(model);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return View(nameof(Index));
+        }
     }
 }
