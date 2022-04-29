@@ -1,6 +1,5 @@
 ﻿@inject UserManager<AppUser> _userManager
 @{
-
     string? active = TempData["Active"]?.ToString();
 }
 <!DOCTYPE html>
@@ -13,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>@ViewBag.Title</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

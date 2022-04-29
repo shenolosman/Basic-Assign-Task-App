@@ -43,7 +43,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         {
             TempData["Active"] = "Home";
             ViewBag.ActivePage = page;
-
+            ViewBag.Searched = s;
             int totalPage;
             var users = _appUserService.GetUsersNotInAdminRole(out totalPage, s, page);
             ViewBag.AllPage = totalPage;

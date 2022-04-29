@@ -72,7 +72,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
                 Description = task.Description,
                 Title = task.Title
             };
-            ViewBag.State = new SelectList(_stateOfUrgentService.GetAll(), "Id", "Type", task.Id);
+            ViewBag.State = new SelectList(_stateOfUrgentService.GetAll(), "Id", "Type", task.StateOfUrgentId);
             return View(model);
         }
         [HttpPost]
@@ -82,10 +82,10 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
             {
                 _myTaskService.Edit(new MyTask()
                 {
+                    Id = model.Id,
                     Title = model.Title,
                     Description = model.Title,
-                    Id = model.Id,
-                    StateOfUrgentId = model.Id
+                    StateOfUrgentId = model.StateOfUrgentId
                 });
                 return RedirectToAction(nameof(Index));
             }

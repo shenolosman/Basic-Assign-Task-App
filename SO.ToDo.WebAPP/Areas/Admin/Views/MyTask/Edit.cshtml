@@ -1,9 +1,11 @@
 ﻿@model MyTaskUpdateVievModel
-@{ViewBag.Title="Edit Task";}
+@{
+    ViewBag.Title="Edit Task";
+}
 
-<h1>Add</h1>
+<h1>Edit</h1>
 
-<form class="w-50 mx-auto" method="post">
+<form class="w-50 mx-auto" method="post" asp-action="Edit">
     <input type="hidden" asp-for="Id"/>
     <div class="mb-5">
         <label asp-for="Title" class="form-label col-form-label-lg"></label>
@@ -25,7 +27,7 @@
         </select>
     </div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <button type="submit" class="btn btn-primary btn-lg">Add</button>
+    <button type="submit" class="btn btn-primary btn-lg">Edit</button>
 </form>
 
 @section Scripts {
