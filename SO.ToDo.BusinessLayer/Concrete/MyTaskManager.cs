@@ -51,5 +51,10 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _myTaskDal.GetStateOfUrgentWithId(id);
         }
+
+        public Task<List<MyTask>> GetByAppUserId(int userId)
+        {
+            return _myTaskDal.GetByAppUserId(userId);
+        }
     }
 }

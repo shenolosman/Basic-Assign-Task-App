@@ -44,7 +44,7 @@
                 <div class="card mb-3">
                     <div class="row no-gutters">
                         <div class="col-md-4">
-                            <img src="~/img/@item.Picture" alt="@item.UserName" class="card-img"/>
+                            <img src="~/img/@item.Picture" alt="@item.UserName" class="w-50 card-img"/>
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
@@ -52,10 +52,12 @@
                                     @item.Name @item.SurName
                                 </h5>
                                 <p class="card-text">
-                                    Has any task? : 
+                                    Has any task? :
+                                    <GetMyTaskByAppUserId app-user-id="@Model.Id"></GetMyTaskByAppUserId>
                                 </p>
                                 <p class="card-text">
                                     <small class="text-muted">@item.Email</small>
+                                    <a href="" class="btn btn-outline-success">Assign</a>
                                 </p>
                             </div>
                         </div>

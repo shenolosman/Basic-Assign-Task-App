@@ -7,5 +7,6 @@ namespace SO.ToDo.BusinessLayer.Interfaces
         Task<List<MyTask>> GetUnDoneStatesofUrgent();
         Task<List<MyTask>> GetAllTables();
         Task<MyTask> GetStateOfUrgentWithId(int id);
+        Task<List<MyTask>> GetByAppUserId(int userId);
     }
 }
