@@ -38,5 +38,15 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
             }
             return View(models);
         }
+
+        public IActionResult AssignUser()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IActionResult Detail()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

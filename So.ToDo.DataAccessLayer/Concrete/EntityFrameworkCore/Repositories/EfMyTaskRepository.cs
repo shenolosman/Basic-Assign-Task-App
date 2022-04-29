@@ -22,5 +22,11 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
             return await context.MyTasks.Include(x => x.StateOfUrgent).Include(x => x.Rapports).Include(x => x.AppUser).Where(x => !x.IsDone)
                 .OrderByDescending(x => x.CreatedTime).ToListAsync();
         }
+
+        public async Task<MyTask> GetStateOfUrgentWithId(int id)
+        {
+            await using var context = new ToDoContext();
+            return await context.MyTasks.Include(x => x.StateOfUrgent).FirstOrDefaultAsync(x => x.Id == id);
+        }
     }
 }

@@ -46,5 +46,10 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _myTaskDal.GetAllTables();
         }
+
+        public Task<MyTask> GetStateOfUrgentWithId(int id)
+        {
+            return _myTaskDal.GetStateOfUrgentWithId(id);
+        }
     }
 }
