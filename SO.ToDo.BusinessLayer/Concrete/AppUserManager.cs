@@ -17,9 +17,9 @@ namespace SO.ToDo.BusinessLayer.Concrete
             return _userDal.GetUsersNotInAdminRole();
         }
 
-        public List<AppUser> GetUsersNotInAdminRole(string searchword, int activepage = 1)
+        public List<AppUser> GetUsersNotInAdminRole(out int totalpage, string searchword, int activepage = 1)
         {
-            return _userDal.GetUsersNotInAdminRole(searchword, activepage);
+            return _userDal.GetUsersNotInAdminRole(out totalpage, searchword, activepage);
         }
     }
 }

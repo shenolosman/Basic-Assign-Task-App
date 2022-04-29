@@ -38,12 +38,53 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
             }
             return View(models);
         }
+        //s=search
+        public async Task<IActionResult> AssignUser(int id, string s, int page = 1)
+        {
+            TempData["Active"] = "Home";
+            ViewBag.ActivePage = page;
 
+            int totalPage;
+            var users = _appUserService.GetUsersNotInAdminRole(out totalPage, s, page);
+            ViewBag.AllPage = totalPage;
+            var userListModel = new List<AppUserListViewModel>();
+            foreach (var item in users)
+            {
+                var appUserModel = new AppUserListViewModel
+                {
+                    Id = item.Id,
+                    UserName = item.UserName,
+                    Email = item.Email,
+                    Picture = item.Picture,
+                    Name = item.Name,
+                    SurName = item.Surname
+                };
+                userListModel.Add(appUserModel);
+            }
+            ViewBag.Users = userListModel;
+
+            var myTask = await _myTaskService.GetStateOfUrgentWithId(id);
+            var taskModel = new MyTaskListViewModel
+            {
+                Id = myTask.Id,
+                StateOfUrgent = myTask.StateOfUrgent,
+                CreatedTime = myTask.CreatedTime,
+                Description = myTask.Description,
+                Title = myTask.Title,
+            };
+            return View(taskModel);
+        }
+        [HttpPost]
         public IActionResult AssignUser()
         {
             throw new NotImplementedException();
         }
-
+        public IActionResult Detail(int id)
+        {
+            TempData["Active"] = "Home";
+            throw new NotImplementedException();
+        }
+        [HttpPost]
         public IActionResult Detail()
         {
             throw new NotImplementedException();

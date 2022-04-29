@@ -30,7 +30,7 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
                  }).ToList();
         }
 
-        public List<AppUser> GetUsersNotInAdminRole(string searchword, int activepage = 1)
+        public List<AppUser> GetUsersNotInAdminRole(out int totalpage, string searchword, int activepage = 1)
         {
 
             using var context = new ToDoContext();
@@ -53,11 +53,13 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
                     Picture = x.users.Picture,
                     UserName = x.users.UserName
                 });
+            totalpage = (int)Math.Ceiling((double)result.Count() / 3);
 
             //brings only member users then for search bar using where
             if (!string.IsNullOrWhiteSpace(searchword))
             {
                 result = result.Where(x => x.Name.ToLower().Contains(searchword) || x.Surname.ToLower().Contains(searchword.ToLower()));
+                totalpage = (int)Math.Ceiling((double)result.Count() / 3);
             }
             //after all result for the pagination showing if there 3 user 
             result = result.Skip((activepage - 1) * 3).Take(3);
