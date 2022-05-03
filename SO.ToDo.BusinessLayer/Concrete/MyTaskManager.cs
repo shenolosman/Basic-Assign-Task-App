@@ -56,5 +56,10 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _myTaskDal.GetByAppUserId(userId);
         }
+
+        public Task<MyTask> GetByReportId(int reportId)
+        {
+            return _myTaskDal.GetByReportId(reportId);
+        }
     }
 }

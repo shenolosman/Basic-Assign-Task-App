@@ -57,7 +57,7 @@
                                 </p>
                                 <p class="card-text">
                                     <small class="text-muted">@item.Email</small>
-                                    <a href="" class="btn btn-outline-success">Assign</a>
+                                    <a asp-action="ChargeUser" asp-route-UserId="@item.Id" asp-route-TaskId="@Model.Id" class="btn btn-outline-success">Assign</a>
                                 </p>
                             </div>
                         </div>

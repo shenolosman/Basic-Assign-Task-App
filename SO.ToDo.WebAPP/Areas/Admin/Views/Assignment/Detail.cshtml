@@ -1,0 +1,40 @@
+﻿@model MyTaskAllListViewModel
+@{
+    ViewData["Title"] = "Detail";
+    var userName = Model.AppUser!.Name;
+    var surName = Model.AppUser.Surname;
+}
+
+@if (Model.Rapports.Count > 0)
+{
+    <a class="btn btn-info mt-2">View in Excel!</a>
+    <table class="table table-hover table-sm mt-2 text-center w-75 table-bordered">
+        <thead style="background-color: beige">
+        <tr >
+            <th colspan="2">@userName @surName user write on this @Model.Title for those reports;</th>
+        </tr>
+        </thead>
+        <thead style="background-color: antiquewhite">
+            <tr>
+                <th scope="col">Details</th>
+                <th scope="col">Definition</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Rapports)
+        {
+            <tr>
+                <th>@item.Details</th>
+                <th>@item.Defination</th>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <div class="border border-dark mt-2 text-center">
+        <h3>There is no rapport</h3>
+        <p>@userName @surName still working on @Model.Title</p>
+    </div>
+
+}
+

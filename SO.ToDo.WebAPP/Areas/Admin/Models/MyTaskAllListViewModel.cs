@@ -9,7 +9,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Models
         public string Description { get; set; }
         public DateTime CreatedTime { get; set; }
         public AppUser? AppUser { get; set; }
-        public StateOfUrgent StateOfUrgent { get; set; }
-        public List<Rapport> Rapports { get; set; }
+        public StateOfUrgent? StateOfUrgent { get; set; }
+        public List<Rapport>? Rapports { get; set; }
     }
 }

@@ -11,6 +11,5 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Models
         public bool IsDone { get; set; }
         public StateOfUrgent StateOfUrgent { get; set; }
         public int StateOfUrgentId { get; set; }
-
     }
 }

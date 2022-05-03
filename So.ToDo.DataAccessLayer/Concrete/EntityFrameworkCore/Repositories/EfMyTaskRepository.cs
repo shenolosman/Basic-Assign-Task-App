@@ -26,13 +26,19 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
         public async Task<MyTask> GetStateOfUrgentWithId(int id)
         {
             await using var context = new ToDoContext();
-            return await context.MyTasks.Include(x => x.StateOfUrgent).FirstOrDefaultAsync(x => x.Id == id);
+            return (await context.MyTasks.Include(x => x.StateOfUrgent).FirstOrDefaultAsync(x => x.Id == id))!;
         }
 
         public async Task<List<MyTask>> GetByAppUserId(int userId)
         {
             await using var context = new ToDoContext();
             return await context.MyTasks.Where(x => x.AppUserId == userId).ToListAsync();
+        }
+
+        public async Task<MyTask> GetByReportId(int reportId)
+        {
+            await using var context = new ToDoContext();
+            return (await context.MyTasks.Include(x => x.Rapports).Include(x => x.AppUser).Where(x => x.Id == reportId).FirstOrDefaultAsync())!;
         }
     }
 }

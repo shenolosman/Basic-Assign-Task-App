@@ -1,0 +1,64 @@
+﻿@model UserTaskingListViewModel
+@{
+    ViewData["Title"] = "Charge User";
+}
+
+<h1>Charge User</h1>
+
+<div class="row mt-2">
+    <div class="col-md-12 ">
+        <form asp-action="AssignUser" method="post">
+            <p class="lead">
+                The Task Belew Will Be Charge! Do you want to continue?
+            </p>
+            <div class="form-group text-center">
+                <input asp-for="AppUser.Id" name="UserId" type="hidden" value="@Model.AppUser.Id"/>
+                <input asp-for="Task.Id" name="TaskId" type="hidden" value="@Model.Task.Id"/>
+                <a asp-action="AssignUser" asp-route-id="@Model.Task.Id" class="btn btn-warning">Cancel</a>
+                <button class="btn btn-primary" type="submit">Charge User</button>
+            </div>
+        </form>
+    </div>
+    <hr />
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="text-center lead">Task information</h4>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title">@Model.Task.Title</h5>
+                <p class="card-text">@Model.Task.Description</p>
+                <p class="card-text">
+                    <strong>State: </strong><span class="badge badge-info">@Model.Task.StateOfUrgent.Type</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="text-center lead">User Information</h5>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img src="~/img/@Model.AppUser.Picture" alt="@Model.AppUser.UserName" class="w-50 card-img" />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            @Model.AppUser.Name @Model.AppUser.SurName
+                        </h5>
+                        <p class="card-text">
+                            Has any task? :
+                            <GetMyTaskByAppUserId app-user-id="@Model.AppUser.Id"></GetMyTaskByAppUserId>
+                        </p>
+                        <p class="card-text">
+                            <small class="text-muted">@Model.AppUser.Email</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
