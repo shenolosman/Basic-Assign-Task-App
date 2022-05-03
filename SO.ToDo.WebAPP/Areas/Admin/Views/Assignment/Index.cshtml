@@ -51,11 +51,11 @@
                 <td>
                     @if (item.AppUser == null)
                     {
-                        <a asp-controller="Assignment" asp-action="AssignUser" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Assign User</a>
+                        <a asp-controller="Assignment" asp-action="AssignUser" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Assign User <i class="fa fa-user-plus" aria-hidden="true"></i></a>
                     }
                     else
                     {
-                        <a asp-controller="Assignment" asp-action="Detail" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Detail</a>
+                        <a asp-controller="Assignment" asp-action="Detail" class="btn btn-outline-success btn-sm" asp-route-id="@item.Id">Detail <i class="fa fa-table" aria-hidden="true"></i></a>
                     }
                 </td>
             </tr>

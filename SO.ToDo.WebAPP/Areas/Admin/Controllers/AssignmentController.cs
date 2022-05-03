@@ -95,6 +95,22 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
                 Title = task.Title,
                 Rapports = task.Rapports
             };
+            //Next step for excel download --- EPPlus 6
+            //ExcelPackage excelPackage = new ExcelPackage();
+            //var excelBlank = excelPackage.Workbook.Worksheets.Add("Report1");
+            //excelBlank.Cells[1, 1].Value = "Title";
+            //excelBlank.Cells[1, 2].Value = "task.Description";
+            //for (int i = 2; i < task.Rapports.Count; i++)
+            //{
+            //    excelBlank.Cells[i, 1].Value = task.Title;
+            //    excelBlank.Cells[i, 2].Value = task.Description;
+            //}
+            //excelBlank.Cells["A1"].LoadFromCollection(model.Rapports);
+
+            //var bytes = await excelPackage.GetAsByteArrayAsync();
+            //return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", Guid.NewGuid() + "" + ".xlsx");
+
+
             return View(model);
         }
         [HttpPost]

@@ -9,7 +9,7 @@
             <p class="lead">
                 There is no task!
             </p>
-            <a asp-action="Add" class="btn btn-primary">Create</a>
+            <a asp-action="Add" class="btn btn-primary">Create <i class="fa fa-plus-circle" aria-hidden="true"></i></a>
         </div>
 }
 else
@@ -37,8 +37,8 @@ else
                             <td>@item.StateOfUrgent.Type</td>
 
                             <td>
-                                <a asp-controller="MyTask" asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.Id">Edit</a> |
-                                <a href="/MyTask/Delete/@item.Id" data-toggle="modal" data-target="#DeleteModal" class="btn btn-outline-danger" data-id="@item.Id">Delete</a>
+                                <a asp-controller="MyTask" asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.Id">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
+                                <a href="/MyTask/Delete/@item.Id" data-toggle="modal" data-target="#DeleteModal" class="btn btn-outline-danger" data-id="@item.Id">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>
                             </td>
                         </tr>
             }
@@ -60,8 +60,8 @@ else
                         Are you sure to delete that task?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-danger" id="btnDeleteTask">Delete</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel <i class="fa fa-ban" aria-hidden="true"></i></button>
+                        <button type="button" class="btn btn-danger" id="btnDeleteTask">Delete <i class="fa fa-trash" aria-hidden="true"></i></button>
                     </div>
                 </div>
             </div>

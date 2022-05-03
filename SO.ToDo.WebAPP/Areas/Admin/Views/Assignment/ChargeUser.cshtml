@@ -15,7 +15,7 @@
                 <input asp-for="AppUser.Id" name="UserId" type="hidden" value="@Model.AppUser.Id"/>
                 <input asp-for="Task.Id" name="TaskId" type="hidden" value="@Model.Task.Id"/>
                 <a asp-action="AssignUser" asp-route-id="@Model.Task.Id" class="btn btn-warning">Cancel</a>
-                <button class="btn btn-primary" type="submit">Charge User</button>
+                <button class="btn btn-primary" type="submit">Charge User <i class="fa fa-save" aria-hidden="true"></i></button>
             </div>
         </form>
     </div>

@@ -7,7 +7,7 @@
 
 @if (Model.Rapports.Count > 0)
 {
-    <a class="btn btn-info mt-2">View in Excel!</a>
+    <a class="btn btn-info mt-2" href="">View in Excel! <i class="fa fa-file-excel" aria-hidden="true"></i></a>
     <table class="table table-hover table-sm mt-2 text-center w-75 table-bordered">
         <thead style="background-color: beige">
         <tr >
@@ -16,8 +16,8 @@
         </thead>
         <thead style="background-color: antiquewhite">
             <tr>
-                <th scope="col">Details</th>
-                <th scope="col">Definition</th>
+                <th scope="col"><i class="fa fa-tasks" aria-hidden="true"></i> Details</th>
+                <th scope="col"><i class="fa fa-inbox" aria-hidden="true"></i> Definition</th>
             </tr>
         </thead>
         @foreach (var item in Model.Rapports)

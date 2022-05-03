@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href="~/lib/template-css/simple-sidebar.css" rel="stylesheet">
+    <link href="~/font-awesome/css/all.min.css" rel="stylesheet">
 
 </head>
 
@@ -30,10 +31,10 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">Admin Layout</div>
             <div class="list-group list-group-flush">
-                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")">Index of Admin</a>
-                <a asp-area="Admin" asp-controller="StateOfUrgent" asp-action="Index" class="list-group-item list-group-item-action @(active=="StateOfUrgent"?"active":"")">States of urgent</a>
-                <a asp-area="Admin" asp-controller="MyTask" asp-action="Index" class="list-group-item list-group-item-action @(active=="MyTask"?"active":"")">My Task</a>
-                <a asp-area="Admin" asp-controller="Assignment" asp-action="Index" class="list-group-item list-group-item-action @(active=="Assignment"?"active":"")">Assignment</a>
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                <a asp-area="Admin" asp-controller="StateOfUrgent" asp-action="Index" class="list-group-item list-group-item-action @(active=="StateOfUrgent"?"active":"")"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> States of urgents</a>
+                <a asp-area="Admin" asp-controller="MyTask" asp-action="Index" class="list-group-item list-group-item-action @(active=="MyTask"?"active":"")"><i class="fa fa-tasks" aria-hidden="true"></i> Tasks</a>
+                <a asp-area="Admin" asp-controller="Assignment" asp-action="Index" class="list-group-item list-group-item-action @(active=="Assignment"?"active":"")"><i class="fa fa-file-o" aria-hidden="true"></i> Assignments</a>
                 <a href="#" class="list-group-item list-group-item-action ">Profile</a>
                 <a href="#" class="list-group-item list-group-item-action ">Status</a>
             </div>
@@ -43,21 +44,21 @@
         <div id="page-content-wrapper">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-light" id="menu-toggle">Toggle Menu</button>
+                <button class="btn btn-light" id="menu-toggle"><i id="toggleIcon" class="fa fa-toggle-on" aria-hidden="true"></i> Menu</button>
 
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <span class="navbar-text">
+                        <span class="navbar-text mr-3">
                             <strong>@_userManager.GetUserName(User)</strong>
                         </span>
-                        <li class="nav-item" style="margin-left: 10px">
+                        <li class="nav-item mr-3">
                             <form id="logoutForm" class="form-inline" method="post"
                                   asp-area=""
                                   asp-action="Logout"
                                   asp-controller="Home">
                                 @* @Html.ActionLink("Index", "Index", "Home", new { area = "" }, new {@class="nav-link btn btn-outline-primary"})*@
-                                <button id="logout" type="submit" class="nav-link btn btn-outline-primary">Logout</button>
+                                <button id="logout" type="submit" class="nav-link btn btn-outline-primary"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
                             </form>
                         </li>
 
@@ -76,13 +77,16 @@
     <!-- Bootstrap core JavaScript -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/font-awesome/js/all.min.js"></script>
     @await RenderSectionAsync("Scripts",false)
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function(e) {
           e.preventDefault();
+          //$("#toggleIcon").removeClass("fa-toggle-off").addClass("fa-toggle-on");
           $("#wrapper").toggleClass("toggled");
         });
+ 
     </script>
 
 </body>
