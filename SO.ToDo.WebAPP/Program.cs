@@ -15,6 +15,7 @@ builder.Services.AddScoped<IMyTaskService, MyTaskManager>();
 builder.Services.AddScoped<IRapportService, RapportManager>();
 builder.Services.AddScoped<IStateOfUrgentService, StateOfUrgentManager>();
 builder.Services.AddScoped<IAppUserService, AppUserManager>();
+builder.Services.AddScoped<IFileService, FileManager>();
 
 builder.Services.AddScoped<IMyTaskDAL, EfMyTaskRepository>();
 builder.Services.AddScoped<IStateOfUrgentDal, EfStateOfUrgentRepository>();

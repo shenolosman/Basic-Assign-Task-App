@@ -7,7 +7,8 @@
 
 @if (Model.Rapports.Count > 0)
 {
-    <a class="btn btn-info mt-2" href="">View in Excel! <i class="fa fa-file-excel" aria-hidden="true"></i></a>
+    <a asp-action="MakeExcel" asp-route-id="@Model.Id" target="_blank" class="btn btn-outline-primary" href="">Excel <i class="fa fa-file-excel" aria-hidden="true"></i></a> 
+    <a asp-action="MakePdf" asp-route-id="@Model.Id" target="_blank" class="btn btn-outline-primary" href="">Pdf <i class="fa fa-file-pdf" aria-hidden="true"></i></a>
     <table class="table table-hover table-sm mt-2 text-center w-75 table-bordered">
         <thead style="background-color: beige">
         <tr >

@@ -14,12 +14,14 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         private readonly IAppUserService _appUserService;
         private readonly IMyTaskService _myTaskService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IFileService _fileService;
 
-        public AssignmentController(IAppUserService appUserService, IMyTaskService myTaskService, UserManager<AppUser> userManager)
+        public AssignmentController(IAppUserService appUserService, IMyTaskService myTaskService, UserManager<AppUser> userManager, IFileService fileService)
         {
             _appUserService = appUserService;
             _myTaskService = myTaskService;
             _userManager = userManager;
+            _fileService = fileService;
         }
         public async Task<IActionResult> Index()
         {
@@ -95,22 +97,6 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
                 Title = task.Title,
                 Rapports = task.Rapports
             };
-            //Next step for excel download --- EPPlus 6
-            //ExcelPackage excelPackage = new ExcelPackage();
-            //var excelBlank = excelPackage.Workbook.Worksheets.Add("Report1");
-            //excelBlank.Cells[1, 1].Value = "Title";
-            //excelBlank.Cells[1, 2].Value = "task.Description";
-            //for (int i = 2; i < task.Rapports.Count; i++)
-            //{
-            //    excelBlank.Cells[i, 1].Value = task.Title;
-            //    excelBlank.Cells[i, 2].Value = task.Description;
-            //}
-            //excelBlank.Cells["A1"].LoadFromCollection(model.Rapports);
-
-            //var bytes = await excelPackage.GetAsByteArrayAsync();
-            //return File(bytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", Guid.NewGuid() + "" + ".xlsx");
-
-
             return View(model);
         }
         [HttpPost]
@@ -150,6 +136,18 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
             };
 
             return View(userTaskingListView);
+        }
+
+        public async Task<IActionResult> MakeExcel(int id)
+        {
+            var list = await _myTaskService.GetByReportId(id);
+            return File(await _fileService.ExportExcel(list.Rapports),
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", Guid.NewGuid() + ".xlsx");
+        }
+
+        public IActionResult MakePdf()
+        {
+            throw new NotImplementedException();
         }
     }
 }
