@@ -19,13 +19,13 @@ namespace SO.ToDo.BusinessLayer.Concrete
 
             //pdf files must saves first on the server then user can download not like Excel!
             var fileName = Guid.NewGuid() + ".pdf";
-            var returnPath = "/documents" + fileName;
+            var returnPath = "/documents/" + fileName;
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/documents/" + fileName);
 
             var stream = new FileStream(path, FileMode.Create);
 
             var document = new Document(PageSize.A4, 25f, 25f, 25f, 25f);
-            PdfWriter.GetInstance(document, null);
+            PdfWriter.GetInstance(document, stream);
             document.Open();
             PdfPTable pdfPTable = new PdfPTable(dataTable.Columns.Count);
             for (var i = 0; i < dataTable.Columns.Count; i++)
@@ -48,6 +48,8 @@ namespace SO.ToDo.BusinessLayer.Concrete
 
         public async Task<byte[]> ExportExcel<T>(IEnumerable<T> list) where T : class, new()
         {
+            ExcelPackage.LicenseContext = LicenseContext.Commercial;
+
             //excel download --- EPPlus 6
             var excelPackage = new ExcelPackage();
             var excelBlank = excelPackage.Workbook.Worksheets.Add("Report1");
