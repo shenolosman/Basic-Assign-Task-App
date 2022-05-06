@@ -1,7 +1,13 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Index";
 }
 <h1>Index</h1>
-
-Here is Admin Page
-
+<p class="text-center">Links :</p>
+<div class="list-group list-group-flush w-50 m-auto">
+    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action"> Home</a>
+    <a asp-area="Admin" asp-controller="StateOfUrgent" asp-action="Index"  class="list-group-item list-group-item-action"> States of urgents</a>
+    <a asp-area="Admin" asp-controller="MyTask" asp-action="Index"  class="list-group-item list-group-item-action">  Tasks</a>
+    <a asp-area="Admin" asp-controller="Assignment" asp-action="Index"  class="list-group-item list-group-item-action"> Assignments</a>
+    <a asp-area="Admin" asp-controller="Profile" asp-action="Index" class="list-group-item list-group-item-action"> Profile</a>
+</div>
