@@ -1,8 +1,4 @@
-﻿@inject UserManager<AppUser> _userManager
-@{
-    string? active = TempData["Active"]?.ToString();
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -12,52 +8,37 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>@ViewBag.Title</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="~/lib/template-css/simple-sidebar.css" rel="stylesheet">
+    <link href="~/font-awesome/css/all.min.css" rel="stylesheet">
 
 </head>
 
 <body>
 
     <div class="d-flex" id="wrapper">
-
         <!-- Sidebar -->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">Member Layout</div>
-            <div class="list-group list-group-flush">
-                <a asp-area="Member" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")">My Tasks</a>
-                <a asp-area="Member" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")">Shortcuts</a>
-                <a asp-area="Member" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")">Overview</a>
-                <a asp-area="Member" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")">Events</a>
-                <a asp-area="Member" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")">Profile</a>
-                <a asp-area="Member" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")">Status</a>
-            </div>
-        </div>
+        @await  Component.InvokeAsync("Wrapper")
         <!-- /#sidebar-wrapper -->
         <!-- Page Content -->
         <div id="page-content-wrapper">
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-light" id="menu-toggle">Toggle Menu</button>
-
+                <button class="btn btn-light" id="menu-toggle"><i id="toggleIcon" class="fa fa-toggle-on" aria-hidden="true"></i> Menu</button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                        <span class="navbar-text">
-                            <strong>@_userManager.GetUserName(User)</strong>
-                        </span>
-                        <li class="nav-item" style="margin-left: 10px">
+                        <li class="nav-item mr-3">
                             <form id="logoutForm" class="form-inline" method="post"
                                   asp-area=""
                                   asp-action="Logout"
                                   asp-controller="Home">
-                                @* @Html.ActionLink("Index", "Index", "Home", new { area = "" }, new {@class="nav-link btn btn-outline-primary"})*@
-                                <button id="logout" type="submit" class="nav-link btn btn-outline-primary">Logout</button>
+                                <button id="logout" type="submit" class="nav-link btn btn-outline-primary"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</button>
                             </form>
                         </li>
 
@@ -76,13 +57,16 @@
     <!-- Bootstrap core JavaScript -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="~/font-awesome/js/all.min.js"></script>
+    @await RenderSectionAsync("Scripts",false)
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function(e) {
           e.preventDefault();
+          //$("#toggleIcon").removeClass("fa-toggle-off").addClass("fa-toggle-on");
           $("#wrapper").toggleClass("toggled");
         });
+ 
     </script>
 
 </body>

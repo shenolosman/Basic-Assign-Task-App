@@ -3,13 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.Areas.Admin.Models;
 
-namespace SO.ToDo.WebAPP.Areas.Admin.ViewComponents
+namespace SO.ToDo.WebAPP.ViewComponents
 {
-    public class AdminWrapper : ViewComponent
+    public class Wrapper : ViewComponent
     {
         private readonly UserManager<AppUser> _userManager;
 
-        public AdminWrapper(UserManager<AppUser> userManager)
+        public Wrapper(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
@@ -25,7 +25,14 @@ namespace SO.ToDo.WebAPP.Areas.Admin.ViewComponents
                 Picture = user.Picture,
                 SurName = user.Surname
             };
-            return View(model);
+            var roles = _userManager.GetRolesAsync(user).Result;
+
+            if (roles.Contains("Admin"))
+            {
+                return View(model);
+
+            }
+            return View("Member", model);
         }
     }
 }

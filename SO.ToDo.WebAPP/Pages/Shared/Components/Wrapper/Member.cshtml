@@ -1,0 +1,22 @@
+﻿@model AppUserListViewModel
+@{
+    var active = TempData["Active"]?.ToString();
+}
+<!-- Sidebar -->
+<div class="bg-light border-right" id="sidebar-wrapper">
+    <div class="sidebar-heading">
+        <img src="~/img/@Model.Picture" alt="@Model.Name" style="height: 10rem!important" class="w-100 img-thumbnail"/>
+        <span class="navbar-text mr-3">
+            <strong>@Model.UserName</strong>
+        </span>
+    </div>
+    <div class="list-group list-group-flush">
+        <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+        <a asp-area="Admin" asp-controller="StateOfUrgent" asp-action="Index" class="list-group-item list-group-item-action @(active=="StateOfUrgent"?"active":"")"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> States of urgents</a>
+        <a asp-area="Admin" asp-controller="MyTask" asp-action="Index" class="list-group-item list-group-item-action @(active=="MyTask"?"active":"")"><i class="fa fa-tasks" aria-hidden="true"></i> Tasks</a>
+        <a asp-area="Admin" asp-controller="Assignment" asp-action="Index" class="list-group-item list-group-item-action @(active=="Assignment"?"active":"")"><i class="fa fa-file-o" aria-hidden="true"></i> Assignments</a>
+        <a asp-area="Admin" asp-controller="Profile" asp-action="Index" class="list-group-item list-group-item-action @(active=="Profile"?"active":"")"><i class="fa fa-user" aria-hidden="true"></i> Profile</a>
+        <a href="#" class="list-group-item list-group-item-action ">Status</a>
+    </div>
+</div>
+<!-- /#sidebar-wrapper -->

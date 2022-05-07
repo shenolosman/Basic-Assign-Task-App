@@ -1,6 +1,6 @@
 ﻿@model AppUserListViewModel
 @{
-    string? active = TempData["Active"]?.ToString();
+    var active = TempData["Active"]?.ToString();
 }
 <!-- Sidebar -->
 <div class="bg-light border-right" id="sidebar-wrapper">
