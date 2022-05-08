@@ -10,7 +10,7 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Mapping
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).UseIdentityColumn();
-            builder.Property(x => x.Defination).HasMaxLength(100);
+            builder.Property(x => x.Title).HasMaxLength(100);
             builder.Property(x => x.Details).HasColumnType("ntext");
 
             builder.HasOne(x => x.MyTask).WithMany(x => x.Rapports).HasForeignKey(x => x.MyTaskId);

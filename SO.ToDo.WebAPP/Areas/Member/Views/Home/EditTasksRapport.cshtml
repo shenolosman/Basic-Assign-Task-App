@@ -1,7 +1,6 @@
 ﻿@model RapportUpdateViewModel
 @{
     ViewData["Title"] = "EditTasksRapport";
-    Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
 }
 <div class="card">
     <div class="card-header">
@@ -9,36 +8,40 @@
     </div>
     <div class="card-body">
         <p class="card-text">
-            <span class="text-danger">Task name:</span> @Model.MyTask.Title
+            <span class="text-danger">Task name:</span>
+            <label asp-for="@Model.MyTask.Title"></label>
         </p>
         <p class="card-text">
-            <span class="text-danger">Task description:</span> @Model.MyTask.Description
+            <span class="text-danger">Task description:</span> 
+            <label asp-for="@Model.MyTask.Description"></label>
         </p>
         <p class="card-text">
-            <span class="text-danger">Task state type:</span> @Model.MyTask.StateOfUrgent.Type
+            <span class="text-danger">Task state type:</span> 
+            <label asp-for="@Model.MyTask.StateOfUrgent.Type"></label>
         </p>
     </div>
 </div>
 <form class="w-50 mx-auto" method="post">
-    <input type="hidden" asp-for="@Model.Id"/>
-@*    <input type="hidden" asp-for="@Model.MyTaskId"/>
-    <input type="hidden" asp-for="@Model.MyTask"/>*@
-
+    <input type="hidden" asp-for="@Model.Id" />
+    <input type="hidden" asp-for="@Model.MyTaskId" />
+    <input type="hidden" asp-for="@Model.MyTask" />
+    <input type="hidden" asp-for="@Model.MyTask.Id" />
+    <div class="mb-5">
+        <label asp-for="@Model.Title" class="form-label col-form-label-lg"></label>
+        <span asp-validation-for="@Model.Title" class="text-danger"></span>
+        <textarea asp-for="@Model.Title" type="text" class="form-control form-control-lg"></textarea>
+    </div>
     <div class="mb-5">
         <label asp-for="@Model.Details" class="form-label col-form-label-lg"></label>
         <span asp-validation-for="@Model.Details" class="text-danger"></span>
-        <input asp-for="@Model.Details" type="text" class="form-control form-control-lg"/>
-    </div>
-
-    <div class="mb-5">
-        <label asp-for="@Model.Defination" class="form-label col-form-label-lg"></label>
-        <span asp-validation-for="@Model.Defination" class="text-danger"></span>
-        <textarea asp-for="@Model.Defination" type="text" class="form-control form-control-lg"></textarea>
+        <input asp-for="@Model.Details" type="text" class="form-control form-control-lg" />
     </div>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <button type="submit" class="btn btn-primary btn-lg">Add <i class="fa fa-save" aria-hidden="true"></i></button> | <a class="btn btn-outline-primary" asp-area="Member" asp-controller="Home" asp-action="Index">Go Back</a>
 </form>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

@@ -9,7 +9,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Models
         [Required]
         public string Details { get; set; }
         [Required]
-        public string Defination { get; set; }
+        public string Title { get; set; }
         public int MyTaskId { get; set; }
         public MyTask MyTask { get; set; }
     }

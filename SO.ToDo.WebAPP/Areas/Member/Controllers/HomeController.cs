@@ -43,7 +43,13 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             }
             return View(models);
         }
-
+        public IActionResult MakeDoneTask(int id)
+        {
+            var updateTask = _myTaskService.GetById(id);
+            updateTask.IsDone = true;
+            _myTaskService.Edit(updateTask);
+            return Json(null);
+        }
         public IActionResult DoneTasks()
         {
             TempData["Active"] = "DoneTasks";
@@ -64,7 +70,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             {
                 Id = report.Id,
                 MyTask = report.MyTask,
-                Defination = report.Defination,
+                Title = report.Title,
                 Details = report.Details,
                 MyTaskId = report.MyTaskId
             };
@@ -75,7 +81,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         {
             //if (!ModelState.IsValid) return View(model);
             var report = _rapportService.GetByTaskId(model.Id);
-            report.Defination = model.Defination;
+            report.Title = model.Title;
             report.Details = model.Details;
             _rapportService.Edit(report);
             return RedirectToAction(nameof(Index));
@@ -83,7 +89,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         public IActionResult AddTaskReport(int id)
         {
             TempData["Active"] = "Home";
-            var task = _myTaskService.GetStateOfUrgentWithId(id).Result;
+            var task = _myTaskService.GetAllTables().Result.Find(x => x.Id == id);
             var model = new RapportAddViewModel
             {
                 MyTaskId = id,
@@ -98,7 +104,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             //if (!ModelState.IsValid) return View(model);
             _rapportService.Add(new Rapport()
             {
-                Defination = model.Defination,
+                Title = model.Title,
                 Details = model.Details,
                 MyTaskId = model.MyTaskId
             });
