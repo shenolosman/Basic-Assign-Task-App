@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.Entities.Concrete;
-using SO.ToDo.WebAPP.Areas.Member.Models;
+using SO.ToDo.WebAPP.Areas.Admin.Models;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {

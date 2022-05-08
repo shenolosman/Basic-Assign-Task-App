@@ -1,6 +1,7 @@
 ﻿using So.ToDo.DataAccessLayer.Interfaces;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.Entities.Concrete;
+using System.Linq.Expressions;
 
 namespace SO.ToDo.BusinessLayer.Concrete
 {
@@ -60,6 +61,11 @@ namespace SO.ToDo.BusinessLayer.Concrete
         public Task<MyTask> GetByReportId(int reportId)
         {
             return _myTaskDal.GetByReportId(reportId);
+        }
+
+        public Task<List<MyTask>> GetAllTables(Expression<Func<MyTask, bool>> filter)
+        {
+            return _myTaskDal.GetAllTables(filter);
         }
     }
 }

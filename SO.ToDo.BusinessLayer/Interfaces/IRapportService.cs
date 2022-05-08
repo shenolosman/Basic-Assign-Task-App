@@ -5,5 +5,6 @@ namespace SO.ToDo.BusinessLayer.Interfaces
     public interface IRapportService : IGenericService<Rapport>
 
     {
+        Rapport GetByTaskId(int id);
     }
 }

@@ -36,5 +36,10 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _rapportDal.GetAll();
         }
+
+        public Rapport GetByTaskId(int id)
+        {
+            return _rapportDal.GetByTaskId(id);
+        }
     }
 }

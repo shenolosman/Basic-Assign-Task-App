@@ -46,7 +46,7 @@ namespace SO.ToDo.WebAPP.Controllers
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt!");
             }
-            return View(nameof(Index), model);
+            return View(nameof(Index));
         }
         public IActionResult Register()
         {
