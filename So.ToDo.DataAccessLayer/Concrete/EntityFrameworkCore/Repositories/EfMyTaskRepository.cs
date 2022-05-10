@@ -56,5 +56,17 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
             await using var context = new ToDoContext();
             return (await context.MyTasks.Include(x => x.Rapports).Include(x => x.AppUser).Where(x => x.Id == reportId).FirstOrDefaultAsync())!;
         }
+
+        public int GetTaskCountCompletedWithUserId(int id)
+        {
+            using var context = new ToDoContext();
+            return context.MyTasks.Count(x => x.AppUserId == id && x.IsDone);
+        }
+
+        public int GetTaskCountMustCompleteByUserId(int id)
+        {
+            using var context = new ToDoContext();
+            return context.MyTasks.Count(x => x.AppUserId == id && !x.IsDone);
+        }
     }
 }

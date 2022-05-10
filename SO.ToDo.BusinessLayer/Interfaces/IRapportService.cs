@@ -6,5 +6,7 @@ namespace SO.ToDo.BusinessLayer.Interfaces
 
     {
         Rapport GetByTaskId(int id);
+        int GetReportsByUserId(int id);
+
     }
 }

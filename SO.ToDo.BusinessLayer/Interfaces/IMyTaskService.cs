@@ -12,6 +12,8 @@ namespace SO.ToDo.BusinessLayer.Interfaces
         Task<MyTask> GetByReportId(int reportId);
         Task<List<MyTask>> GetAllTables(Expression<Func<MyTask, bool>> filter);
         List<MyTask> GetAllTablesWithNotDone(out int totalPage, int userId, int activePage);
+        int GetTaskCountCompletedWithUserId(int id);
+        int GetTaskCountMustCompleteByUserId(int id);
 
     }
 }

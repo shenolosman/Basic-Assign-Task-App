@@ -14,6 +14,8 @@ namespace So.ToDo.DataAccessLayer.Interfaces
         Task<List<MyTask>> GetByAppUserId(int userId);
 
         Task<MyTask> GetByReportId(int reportId);
+        int GetTaskCountCompletedWithUserId(int id);
+        int GetTaskCountMustCompleteByUserId(int id);
 
     }
 }

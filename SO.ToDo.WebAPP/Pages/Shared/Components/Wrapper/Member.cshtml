@@ -11,7 +11,8 @@
         </span>
     </div>
     <div class="list-group list-group-flush">
-        <a asp-area="Member" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")"><i class="fa fa-tasks" aria-hidden="true"></i> Tasks</a>
+        <a asp-area="Member" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action @(active=="Home"?"active":"")"><i class="fa fa-tasks" aria-hidden="true"></i> Home</a>
+        <a asp-area="Member" asp-controller="Assign" asp-action="Index" class="list-group-item list-group-item-action @(active=="Assign"?"active":"")"><i class="fa fa-tasks" aria-hidden="true"></i> Tasks</a>
         <a asp-area="Member" asp-controller="Task" asp-action="DoneTasks" class="list-group-item list-group-item-action @(active=="DoneTasks"?"active":"")"><i class="fa fa-file-excel" aria-hidden="true"></i> Finished Tasks</a>
         <a asp-area="Member" asp-controller="Notification" asp-action="GetNotification" class="list-group-item list-group-item-action @(active=="Notification"?"active":"") position-relative"><i class="fa fa-bell" aria-hidden="true"></i>
             @if (ViewBag.NotificationsCount > 0)

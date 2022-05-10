@@ -72,5 +72,15 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _myTaskDal.GetAllTablesWithNotDone(out totalPage, userId, activePage);
         }
+
+        public int GetTaskCountCompletedWithUserId(int id)
+        {
+            return _myTaskDal.GetTaskCountCompletedWithUserId(id);
+        }
+
+        public int GetTaskCountMustCompleteByUserId(int id)
+        {
+            return _myTaskDal.GetTaskCountMustCompleteByUserId(id);
+        }
     }
 }

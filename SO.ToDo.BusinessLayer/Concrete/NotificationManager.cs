@@ -41,5 +41,10 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _notificationDal.GetNotRead(AppUserId);
         }
+
+        public int GetNotReadCountByUserId(int id)
+        {
+            return _notificationDal.GetNotReadCountByUserId(id);
+        }
     }
 }

@@ -11,5 +11,11 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
             using var context = new ToDoContext();
             return context.Notifications.Where(x => x.AppUserId == AppUserId && !x.State).ToList();
         }
+
+        public int GetNotReadCountByUserId(int id)
+        {
+            using var context = new ToDoContext();
+            return context.Notifications.Count(x => x.AppUserId == id && !x.State);
+        }
     }
 }

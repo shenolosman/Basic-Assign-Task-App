@@ -1,102 +1,77 @@
-﻿@model List<MyTaskAllListViewModel>
-@{
+﻿@{
     ViewData["Title"] = "Index";
-    var count = 0;
 }
-
-@foreach (var item in Model)
-{
-    count++;
-    <div class="card my-1">
-        <div class="card-header">
-            <h4 class="text-center lead">@item.Title</h4>
-        </div>
-
-        <div class="card-body">
-            <h5 class="card-title"><strong>State: </strong><span class="badge badge-info">@item.StateOfUrgent.Type</span></h5>
-            <p class="card-text">@item.Description</p>
-            <p class="text-right">
-                @if (item.Rapports.Count > 0)
+<h1 class=" text-center">Statistic</h1>
+<hr class="collapse-horizontal" />
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card bg-primary mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-white">Must Complete Tasks</h4>
+                @if (ViewBag.MustCompleteTaskCount > 0)
                 {
-                    <a class="btn btn-light" data-toggle="collapse" href="#collapseReport-@count" role="button" aria-expanded="false" aria-controls="collapseReport">
-                        <i class="fa fa-arrow-down"></i> Reports <span class="badge badge-dark"> @item.Rapports.Count</span>
+                    <p class="card-text display-4 text-center text-white">@ViewBag.MustCompleteTaskCount</p>
+                    <a asp-area="Member" asp-controller="Assign" asp-action="Index" class="text-white">
+                        <i class="fas fa-chevron-circle-right"></i> See More...
                     </a>
                 }
                 else
                 {
-                    <span class="lead font-weight-bold font-italic p-2 d-block mb-2">Please write report</span>
-                    <a asp-area="Member" asp-controller="Home" asp-action="AddTaskReport" asp-route-id="@item.Id" class="btn btn-primary"><i class="fa fa-page4"></i> Write Reports</a>
+                    <p class="lead card-text text-white">No task!</p>
                 }
-                <a asp-action="MakeDoneTask" asp-route-id="@item.Id" data-toggle="modal" data-target="#markModal" class="btn btn-outline-danger" data-id="@item.Id"><i class="fa fa-marker"></i> Mark as completed</a>
-            </p>
-            <div class="collapse" id="collapseReport-@count">
-                <a asp-area="Member" asp-controller="Home" asp-action="AddTaskReport" asp-route-id="@item.Id" class="btn btn-primary m-1"><i class="fa fa-save"></i> Write Reports</a>
-                <table class="table table-hover table-bordered table-sm">
-                    <tr>
-                        <th>Title</th>
-                        <th>Details</th>
-                        <th>Do!</th>
-                    </tr>
-
-                    @foreach (var rapport in item.Rapports)
-                    {
-                        <tr>
-                            <td>@rapport.Title</td>
-                            <td>@rapport.Details</td>
-                            <td><a asp-area="Member" asp-controller="Home" asp-action="EditTasksRapport" asp-route-id="@rapport.Id" class="btn btn-warning">Edit</a></td>
-                        </tr>
-                    }
-
-                </table>
             </div>
-
         </div>
     </div>
-}
-<!-- Modal -->
-<div class="modal fade" id="markModal" tabindex="-1" aria-labelledby="markModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="markModalLabel">Warning!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <div class="col-md-6">
+        <div class="card bg-primary mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-white">Completed Task Count</h4>
+                @if (ViewBag.CompletedTaskCount > 0)
+                {
+                    <p class="card-text display-4 text-center text-white">@ViewBag.CompletedTaskCount</p>
+                    <a asp-area="Member" asp-controller="Task" asp-action="DoneTasks" class="text-white">
+                        <i class="fas fa-chevron-circle-right"></i> See More...
+                    </a>
+                }
+                else
+                {
+                    <p class="lead card-text text-white">No task is done yet!</p>
+                }
             </div>
-            <div class="modal-body">
-                Are you sure to delete that task?
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-primary mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-white">Reports count</h4>
+                @if (ViewBag.ReportCount > 0)
+                {
+                    <p class="card-text display-4 text-center text-white">@ViewBag.ReportCount</p>
+                }
+                else
+                {
+                    <p class="lead card-text text-white">No written report!</p>
+                }
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel <i class="fa fa-ban" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-danger" id="btnMarkTask">Mark as done <i class="fa fa-donate" aria-hidden="true"></i></button>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-primary mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-white">Notifications Count</h4>
+                @if (ViewBag.NotReadNotificationCount > 0)
+                {
+                    <p class="card-text display-4 text-center text-white">@ViewBag.NotReadNotificationCount</p>
+                    <a asp-area="Member" asp-controller="Notification" asp-action="GetNotification" class="text-white">
+                        <i class="fas fa-chevron-circle-right"></i> See More...
+                    </a>
+                }
+                else
+                {
+                    <p class="lead card-text text-white">All notifications read!</p>
+                }
             </div>
         </div>
     </div>
 </div>
-
-@section Scripts{
-<script type="text/javascript">
-    $(document).ready(function() {
-        $("#markModal").on("show.bs.modal", function(event) {
-                var button = $(event.relatedTarget);
-                var dataId = button.data("id");
-                //alert(dataId)
-                $("#btnMarkTask").click(function() {
-                    $.ajax({
-                        type: "GET",
-                        contentType: "application/json; charset=utf-8;",
-                        url: "/Member/Home/MakeDoneTask",
-                        data: { id: dataId },
-                        success: function() {
-                            window.location.reload();
-                        },
-                        error: function(error) {
-                            alert(error.statusText);
-                        }
-                });
-                });
-            });
-    });
-</script>
-}
 
