@@ -7,7 +7,7 @@ namespace SO.ToDo.BusinessLayer.ValidationRules.FluentValidation
     {
         public AppUserSignInValidator()
         {
-            RuleFor(x => x.Username).NotNull().WithMessage("Please Fill Username Field!");
+            RuleFor(x => x.UserName).NotNull().WithMessage("Please Fill Username Field!");
             RuleFor(x => x.Password).NotNull().WithMessage("Please Fill Password Field!");
         }
     }

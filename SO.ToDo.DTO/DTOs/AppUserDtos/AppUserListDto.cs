@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public string Name { get; set; }
         // [Display(Name = "Surname")]
-        public string SurName { get; set; }
+        public string Surname { get; set; }
         //  [Display(Name = "Username")]
         public string UserName { get; set; }
         //   [Display(Name = "Email")]
