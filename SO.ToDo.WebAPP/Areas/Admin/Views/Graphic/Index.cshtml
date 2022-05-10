@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Graphic Chart</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div id="piechart"></div>
+    </div>
+    <div class="col-md-6">
+        <div id="piechart_3d"></div>
+    </div>
+</div>
+
+
+
+
+@section Scripts
+{
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    
+
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        let mostDoneTask=[["User Name","Task Count"]]
+        $.ajax({
+            type: "Get",
+            async:false,
+            url: "./Graphic/MostDoneTask",
+            success: function(data) {
+                let incomingObj = jQuery.parseJSON(data);
+                $.each(incomingObj,
+                    (index, value) => {
+                        mostDoneTask.push([value.Name,value.TaskCount]);
+                    });
+            }
+        });
+        var data = google.visualization.arrayToDataTable(mostDoneTask);
+
+        var options = {
+            title: 'Most Task Done'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+        chart.draw(data, options);
+    }
+
+  
+
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart3d);
+    function drawChart3d() {
+        let mostTaskHave=[["User Name","Task Count"]]
+        $.ajax({
+            type: "Get",
+            async:false,
+            url: "./Graphic/MostTaskHave",
+            success: function(data) {
+                let incomingObj = jQuery.parseJSON(data);
+                $.each(incomingObj,
+                    (index, value) => {
+                        mostTaskHave.push([value.Name,value.TaskCount]);
+                    });
+            }
+        });
+        var data = google.visualization.arrayToDataTable(mostTaskHave);
+
+        var options = {
+            title: 'Most Task Assigned User',
+            is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+    }
+</script>
+}

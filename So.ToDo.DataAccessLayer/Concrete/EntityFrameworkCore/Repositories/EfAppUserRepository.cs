@@ -1,4 +1,5 @@
-﻿using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts;
 using So.ToDo.DataAccessLayer.Interfaces;
 using SO.ToDo.Entities.Concrete;
 
@@ -66,5 +67,23 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
             return result.ToList();
         }
 
+        public List<DualHelper> GetUsersMostDoneTask()
+        {
+            using var context = new ToDoContext();
+            return context.MyTasks.Include(x => x.AppUser).Where(x => x.IsDone).GroupBy(x => x.AppUser.UserName).OrderByDescending(x => x.Count()).Take(5).Select(x => new DualHelper
+            {
+                Name = x.Key,
+                TaskCount = x.Count()
+            }).ToList();
+        }
+        public List<DualHelper> GetUsersMostTaskHave()
+        {
+            using var context = new ToDoContext();
+            return context.MyTasks.Include(x => x.AppUser).Where(x => !x.IsDone && x.AppUserId != null).GroupBy(x => x.AppUser.UserName).OrderByDescending(x => x.Count()).Take(5).Select(x => new DualHelper
+            {
+                Name = x.Key,
+                TaskCount = x.Count()
+            }).ToList();
+        }
     }
 }

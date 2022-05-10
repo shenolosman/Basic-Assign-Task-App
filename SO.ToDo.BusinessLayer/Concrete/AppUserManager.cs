@@ -21,5 +21,15 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _userDal.GetUsersNotInAdminRole(out totalpage, searchword, activepage);
         }
+
+        public List<DualHelper> GetUsersMostDoneTask()
+        {
+            return _userDal.GetUsersMostDoneTask();
+        }
+
+        public List<DualHelper> GetUsersMostTaskHave()
+        {
+            return _userDal.GetUsersMostTaskHave();
+        }
     }
 }
