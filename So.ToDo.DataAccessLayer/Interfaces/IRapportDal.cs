@@ -6,5 +6,6 @@ namespace So.ToDo.DataAccessLayer.Interfaces
     {
         Rapport GetByTaskId(int id);
         int GetReportsByUserId(int Id);
+        int GetReportCount();
     }
 }

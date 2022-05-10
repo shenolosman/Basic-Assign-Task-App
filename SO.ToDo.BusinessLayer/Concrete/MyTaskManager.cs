@@ -82,5 +82,15 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _myTaskDal.GetTaskCountMustCompleteByUserId(id);
         }
+
+        public int GetWaitingAssignTask()
+        {
+            return _myTaskDal.GetWaitingAssignTask();
+        }
+
+        public int GetDoneTasks()
+        {
+            return _myTaskDal.GetDoneTasks();
+        }
     }
 }

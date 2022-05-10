@@ -19,5 +19,11 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
             var result = context.MyTasks.Include(x => x.Rapports).Where(x => x.AppUserId == id);
             return result.SelectMany(x => x.Rapports).Count();
         }
+
+        public int GetReportCount()
+        {
+            using var context = new ToDoContext();
+            return context.Rapports.Count();
+        }
     }
 }

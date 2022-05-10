@@ -68,5 +68,17 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
             using var context = new ToDoContext();
             return context.MyTasks.Count(x => x.AppUserId == id && !x.IsDone);
         }
+
+        public int GetWaitingAssignTask()
+        {
+            using var context = new ToDoContext();
+            return context.MyTasks.Count(x => x.AppUserId == null && !x.IsDone);
+        }
+
+        public int GetDoneTasks()
+        {
+            using var context = new ToDoContext();
+            return context.MyTasks.Count(x => x.IsDone);
+        }
     }
 }

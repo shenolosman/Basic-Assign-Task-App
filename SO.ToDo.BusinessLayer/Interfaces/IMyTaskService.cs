@@ -14,6 +14,9 @@ namespace SO.ToDo.BusinessLayer.Interfaces
         List<MyTask> GetAllTablesWithNotDone(out int totalPage, int userId, int activePage);
         int GetTaskCountCompletedWithUserId(int id);
         int GetTaskCountMustCompleteByUserId(int id);
+        int GetWaitingAssignTask();
+        int GetDoneTasks();
+
 
     }
 }

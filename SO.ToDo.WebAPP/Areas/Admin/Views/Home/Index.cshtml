@@ -1,13 +1,74 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewData["Title"] = "Index";
 }
-<h1>Index</h1>
-<p class="text-center">Links :</p>
-<div class="list-group list-group-flush w-50 m-auto">
-    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="list-group-item list-group-item-action"> Home</a>
-    <a asp-area="Admin" asp-controller="StateOfUrgent" asp-action="Index"  class="list-group-item list-group-item-action"> States of urgents</a>
-    <a asp-area="Admin" asp-controller="MyTask" asp-action="Index"  class="list-group-item list-group-item-action">  Tasks</a>
-    <a asp-area="Admin" asp-controller="Assignment" asp-action="Index"  class="list-group-item list-group-item-action"> Assignments</a>
-    <a asp-area="Admin" asp-controller="Profile" asp-action="Index" class="list-group-item list-group-item-action"> Profile</a>
+<h1 class=" text-center">Statistic</h1>
+<hr class="collapse-horizontal" />
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card bg-primary mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-white">Completed Tasks</h4>
+                @if (ViewBag.CompletedTaskCount > 0)
+                {
+                    <p class="card-text display-4 text-center text-white">@ViewBag.CompletedTaskCount</p>
+                }
+                else
+                {
+                    <p class="lead card-text text-white">Not completed tasks yes!</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-primary mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-white">Not Assigned Task Count</h4>
+                @if (ViewBag.NotAssignTaskCount > 0)
+                {
+                    <p class="card-text display-4 text-center text-white">@ViewBag.NotAssignTaskCount</p>
+                    <a asp-area="Admin" asp-controller="Assignment" asp-action="Index" class="text-white">
+                        <i class="fas fa-chevron-circle-right"></i> See More...
+                    </a>
+                }
+                else
+                {
+                    <p class="lead card-text text-white">No task assign yet or no task!</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-primary mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-white">Reports count</h4>
+                @if (ViewBag.ReportCount > 0)
+                {
+                    <p class="card-text display-4 text-center text-white">@ViewBag.ReportCount</p>
+                }
+                else
+                {
+                    <p class="lead card-text text-white">No written report!</p>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card bg-primary mb-3">
+            <div class="card-body">
+                <h4 class="card-title text-white">Notifications Count</h4>
+                @if (ViewBag.NotReadNotificationCount > 0)
+                {
+                    <p class="card-text display-4 text-center text-white">@ViewBag.NotReadNotificationCount</p>
+                    <a asp-area="Admin" asp-controller="Notification" asp-action="GetNotification" class="text-white">
+                        <i class="fas fa-chevron-circle-right"></i> See More...
+                    </a>
+                }
+                else
+                {
+                    <p class="lead card-text text-white">All notifications read!</p>
+                }
+            </div>
+        </div>
+    </div>
 </div>
+
