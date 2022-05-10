@@ -63,14 +63,6 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             }
             return Json(null);
         }
-
-
-        public IActionResult Transmissions()
-        {
-            TempData["Active"] = "Transmissions";
-            throw new NotImplementedException();
-        }
-
         public IActionResult EditTasksRapport(int id)
         {
             TempData["Active"] = "Home";

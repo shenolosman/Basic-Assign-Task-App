@@ -36,5 +36,10 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _notificationDal.GetAll();
         }
+
+        public List<Notification> GetNotRead(int AppUserId)
+        {
+            return _notificationDal.GetNotRead(AppUserId);
+        }
     }
 }

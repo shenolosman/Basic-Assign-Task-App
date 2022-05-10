@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.Areas.Admin.Models;
 
@@ -8,10 +9,12 @@ namespace SO.ToDo.WebAPP.ViewComponents
     public class Wrapper : ViewComponent
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly INotificationService _notificationService;
 
-        public Wrapper(UserManager<AppUser> userManager)
+        public Wrapper(UserManager<AppUser> userManager, INotificationService notificationService)
         {
             _userManager = userManager;
+            _notificationService = notificationService;
         }
         public IViewComponentResult Invoke()
         {
@@ -25,6 +28,9 @@ namespace SO.ToDo.WebAPP.ViewComponents
                 Picture = user.Picture,
                 SurName = user.Surname
             };
+
+            var notifications = _notificationService.GetNotRead(user.Id).Count;
+            ViewBag.NotificationsCount = notifications;
             var roles = _userManager.GetRolesAsync(user).Result;
 
             if (roles.Contains("Admin"))
