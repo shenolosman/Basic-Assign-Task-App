@@ -20,10 +20,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SO.ToDo.Web", "SO.ToDo.Web\
 		{51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB} = {51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SO.ToDo.WebAPP", "SO.ToDo.WebAPP\SO.ToDo.WebAPP.csproj", "{F65B1487-E98E-42BA-96B2-3A0E79389BD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SO.ToDo.WebAPP", "SO.ToDo.WebAPP\SO.ToDo.WebAPP.csproj", "{F65B1487-E98E-42BA-96B2-3A0E79389BD2}"
 	ProjectSection(ProjectDependencies) = postProject
 		{51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB} = {51B5E629-1AC9-4D7E-82B6-FB6B1F551DAB}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SO.ToDo.DTO", "SO.ToDo.DTO\SO.ToDo.DTO.csproj", "{68506DF4-B0A3-4FFA-A432-26D5B3774231}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{F65B1487-E98E-42BA-96B2-3A0E79389BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F65B1487-E98E-42BA-96B2-3A0E79389BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F65B1487-E98E-42BA-96B2-3A0E79389BD2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68506DF4-B0A3-4FFA-A432-26D5B3774231}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68506DF4-B0A3-4FFA-A432-26D5B3774231}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68506DF4-B0A3-4FFA-A432-26D5B3774231}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68506DF4-B0A3-4FFA-A432-26D5B3774231}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

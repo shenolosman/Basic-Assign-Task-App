@@ -9,11 +9,13 @@
   <ItemGroup>
     <PackageReference Include="EPPlus" Version="6.0.3" />
     <PackageReference Include="FastMember" Version="1.5.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.0.1" />
     <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.7.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\So.ToDo.DataAccessLayer\So.ToDo.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\SO.ToDo.DTO\SO.ToDo.DTO.csproj" />
     <ProjectReference Include="..\SO.ToDo.Entities\SO.ToDo.Entities.csproj" />
   </ItemGroup>
 
