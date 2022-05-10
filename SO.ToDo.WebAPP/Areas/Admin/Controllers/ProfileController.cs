@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.Entities.Concrete;
-using SO.ToDo.WebAPP.Areas.Admin.Models;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
 {
@@ -11,31 +12,34 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
     public class ProfileController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public ProfileController(UserManager<AppUser> userManager)
+        public ProfileController(UserManager<AppUser> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = "Profile";
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var model = new AppUserListViewModel
-            {
-                Email = user.Email,
-                Id = user.Id,
-                Name = user.Name,
-                UserName = user.UserName,
-                Picture = user.Picture,
-                SurName = user.Surname
-            };
-            return View(model);
+            //var model = new AppUserListViewModel
+            //{
+            //    Email = user.Email,
+            //    Id = user.Id,
+            //    Name = user.Name,
+            //    UserName = user.UserName,
+            //    Picture = user.Picture,
+            //    SurName = user.Surname
+            //};
+
+            return View(_mapper.Map<AppUserListDto>(user));
         }
 
         [HttpPost]
         //name="image" variable comes from img to equal iformfile
-        public async Task<IActionResult> Index(AppUserListViewModel model, IFormFile image)
+        public async Task<IActionResult> Index(AppUserListDto model, IFormFile image)
         {
             if (ModelState.IsValid)
             {
@@ -50,7 +54,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
                     user.Picture = imgName;
                 }
                 user.Name = model.Name;
-                user.Surname = model.SurName;
+                user.Surname = model.Surname;
                 user.Email = model.Email;
                 user.Id = model.Id;
                 user.UserName = model.UserName;

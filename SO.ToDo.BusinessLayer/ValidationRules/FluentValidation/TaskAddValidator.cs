@@ -8,7 +8,7 @@ namespace SO.ToDo.BusinessLayer.ValidationRules.FluentValidation
         public TaskAddValidator()
         {
             RuleFor(x => x.Title).NotNull().WithMessage("Title field can't be empty");
-            RuleFor(x => x.StateOfUrgentId).ExclusiveBetween(1, int.MaxValue).WithMessage("Please select state from list!");
+            RuleFor(x => x.StateOfUrgentId).ExclusiveBetween(0, int.MaxValue).WithMessage("Please select state from list!");
         }
     }
 }

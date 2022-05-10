@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.BusinessLayer.Interfaces;
+using SO.ToDo.DTO.DTOs.StateOfUrgentDtos;
 using SO.ToDo.Entities.Concrete;
-using SO.ToDo.WebAPP.Areas.Admin.Models;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
 {
@@ -11,36 +12,38 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
     public class StateOfUrgentController : Controller
     {
         private readonly IStateOfUrgentService _stateOfUrgentService;
+        private readonly IMapper _mapper;
 
-        public StateOfUrgentController(IStateOfUrgentService stateOfUrgentService)
+        public StateOfUrgentController(IStateOfUrgentService stateOfUrgentService, IMapper mapper)
         {
             _stateOfUrgentService = stateOfUrgentService;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
             TempData["Active"] = "StateOfUrgent";
-            var list = _stateOfUrgentService.GetAll();
+            //var list = _stateOfUrgentService.GetAll();
 
-            var model = new List<StateOfUrgentListViewModel>();
-            foreach (var item in list)
-            {
-                var modelItem = new StateOfUrgentListViewModel
-                {
-                    Id = item.Id,
-                    Type = item.Type
-                };
-                model.Add(modelItem);
-            }
-            return View(model);
+            //var model = new List<StateOfUrgentListViewModel>();
+            //foreach (var item in list)
+            //{
+            //    var modelItem = new StateOfUrgentListViewModel
+            //    {
+            //        Id = item.Id,
+            //        Type = item.Type
+            //    };
+            //    model.Add(modelItem);
+            //}
+            return View(_mapper.Map<List<StateOfUrgentListDto>>(_stateOfUrgentService.GetAll()));
         }
 
         public IActionResult Add()
         {
             TempData["Active"] = "StateOfUrgent";
-            return View(new StateOfUrgentAddViewModel());
+            return View(new StateOfUrgentAddDto());
         }
         [HttpPost]
-        public IActionResult Add(StateOfUrgentAddViewModel model)
+        public IActionResult Add(StateOfUrgentAddDto model)
         {
             if (ModelState.IsValid)
             {
@@ -52,13 +55,11 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         public IActionResult Edit(int id)
         {
             TempData["Active"] = "StateOfUrgent";
-            var state = _stateOfUrgentService.GetById(id);
-            var model = new StateOfUrgentUpdateViewModel { Id = state.Id, Type = state.Type };
-            return View(model);
+            return View(_mapper.Map<StateOfUrgentUpdateDto>(_stateOfUrgentService.GetById(id)));
         }
 
         [HttpPost]
-        public IActionResult Edit(StateOfUrgentUpdateViewModel model)
+        public IActionResult Edit(StateOfUrgentUpdateDto model)
         {
             if (ModelState.IsValid)
             {

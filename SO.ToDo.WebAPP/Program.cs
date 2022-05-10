@@ -1,15 +1,27 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Identity;
 using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Contexts;
 using So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories;
 using So.ToDo.DataAccessLayer.Interfaces;
 using SO.ToDo.BusinessLayer.Concrete;
 using SO.ToDo.BusinessLayer.Interfaces;
+using SO.ToDo.BusinessLayer.ValidationRules.FluentValidation;
+using SO.ToDo.DTO.DTOs.AppUserDtos;
+using SO.ToDo.DTO.DTOs.RapportDtos;
+using SO.ToDo.DTO.DTOs.StateOfUrgentDtos;
+using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP;
+using SO.ToDo.WebAPP.Mapping.AutoMapperProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddDbContext<ToDoContext>();
+
+builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ToDoContext>();
 
 builder.Services.AddScoped<IMyTaskService, MyTaskManager>();
 builder.Services.AddScoped<IRapportService, RapportManager>();
@@ -24,10 +36,19 @@ builder.Services.AddScoped<IRapportDal, EfRapportRepository>();
 builder.Services.AddScoped<IAppUserDal, EfAppUserRepository>();
 builder.Services.AddScoped<INotificationDal, EfNotificationRepository>();
 
-builder.Services.AddDbContext<ToDoContext>();
+builder.Services.AddAutoMapper(typeof(MapProfile));
 
-builder.Services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<ToDoContext>();
+//FluentValidator
+builder.Services.AddTransient<IValidator<StateOfUrgentAddDto>, StateOfUrgentAddValidator>();
+builder.Services.AddTransient<IValidator<StateOfUrgentUpdateDto>, StateOfUrgentUpdateValidator>();
+builder.Services.AddTransient<IValidator<AppUserAddDto>, AppUserAddValidator>();
+builder.Services.AddTransient<IValidator<AppUserSignInDto>, AppUserSignInValidator>();
+builder.Services.AddTransient<IValidator<MyTaskUpdateDto>, MyTaskUpdateValidator>();
+builder.Services.AddTransient<IValidator<RapportAddDto>, RapportAddValidator>();
+builder.Services.AddTransient<IValidator<RapportUpdateDto>, RapportUpdateValidator>();
+builder.Services.AddTransient<IValidator<MyTaskAddDto>, TaskAddValidator>();
 
+//Cookie
 builder.Services.ConfigureApplicationCookie(o =>
 {
     o.Cookie.Name = "TodoAppCookie";
@@ -39,8 +60,7 @@ builder.Services.ConfigureApplicationCookie(o =>
 });
 
 builder.Services.AddRazorPages();
-builder.Services.AddControllersWithViews();
-
+builder.Services.AddControllersWithViews().AddFluentValidation();
 
 var app = builder.Build();
 
@@ -49,8 +69,6 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
 }
-
-
 app.UseStaticFiles();
 
 app.UseRouting();

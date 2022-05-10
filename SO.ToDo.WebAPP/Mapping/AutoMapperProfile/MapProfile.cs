@@ -42,6 +42,8 @@ namespace SO.ToDo.WebAPP.Mapping.AutoMapperProfile
             CreateMap<MyTask, MyTaskListDto>();
             CreateMap<MyTaskUpdateDto, MyTask>();
             CreateMap<MyTask, MyTaskUpdateDto>();
+            CreateMap<MyTaskAllListDto, MyTask>();
+            CreateMap<MyTask, MyTaskAllListDto>();
             #endregion
 
             #region Rapport-RapportDto

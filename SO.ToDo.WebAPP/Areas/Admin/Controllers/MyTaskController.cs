@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using SO.ToDo.BusinessLayer.Interfaces;
+using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
-using SO.ToDo.WebAPP.Areas.Admin.Models;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
 {
@@ -13,48 +14,50 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
     {
         private readonly IMyTaskService _myTaskService;
         private readonly IStateOfUrgentService _stateOfUrgentService;
+        private readonly IMapper _mapper;
 
-        public MyTaskController(IMyTaskService myTaskService, IStateOfUrgentService stateOfUrgentService)
+        public MyTaskController(IMyTaskService myTaskService, IStateOfUrgentService stateOfUrgentService, IMapper mapper)
         {
             _myTaskService = myTaskService;
             _stateOfUrgentService = stateOfUrgentService;
+            _mapper = mapper;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             TempData["Active"] = "MyTask";
-            var tasks = _myTaskService.GetUnDoneStatesofUrgent();
-            var models = new List<MyTaskListViewModel>();
-            foreach (var item in tasks.Result)
-            {
-                MyTaskListViewModel model = new MyTaskListViewModel
-                {
-                    Id = item.Id,
-                    Description = item.Description,
-                    StateOfUrgent = item.StateOfUrgent,
-                    CreatedTime = item.CreatedTime,
-                    Title = item.Title,
-                    IsDone = item.IsDone,
-                    StateOfUrgentId = item.StateOfUrgentId
-                };
-                models.Add(model);
-            }
-            return View(models);
+            //var tasks = _myTaskService.GetUnDoneStatesofUrgent();
+            //var models = new List<MyTaskListViewModel>();
+            //foreach (var item in tasks.Result)
+            //{
+            //    MyTaskListViewModel model = new MyTaskListViewModel
+            //    {
+            //        Id = item.Id,
+            //        Description = item.Description,
+            //        StateOfUrgent = item.StateOfUrgent,
+            //        CreatedTime = item.CreatedTime,
+            //        Title = item.Title,
+            //        IsDone = item.IsDone,
+            //        StateOfUrgentId = item.StateOfUrgentId
+            //    };
+            //    models.Add(model);
+            //}
+            return View(_mapper.Map<List<MyTaskListDto>>(await _myTaskService.GetUnDoneStatesofUrgent()));
         }
         public IActionResult Add()
         {
             TempData["Active"] = "MyTask";
             ViewBag.States = new SelectList(_stateOfUrgentService.GetAll(), "Id", "Type");
-            return View(new MyTaskAddViewModel());
+            return View(new MyTaskAddDto());
         }
         [HttpPost]
-        public IActionResult Add(MyTaskAddViewModel model)
+        public IActionResult Add(MyTaskAddDto model)
         {
             if (ModelState.IsValid)
             {
                 _myTaskService.Add(new MyTask()
                 {
-                    Description = model.Description,
                     Title = model.Title,
+                    Description = model.Description,
                     StateOfUrgentId = model.StateOfUrgentId
                 });
                 return RedirectToAction(nameof(Index));
@@ -65,18 +68,18 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         {
             TempData["Active"] = "MyTask";
             var task = _myTaskService.GetById(id);
-            var model = new MyTaskUpdateVievModel
-            {
-                Id = task.Id,
-                StateOfUrgentId = task.StateOfUrgentId,
-                Description = task.Description,
-                Title = task.Title
-            };
+            //var model = new MyTaskUpdateVievModel
+            //{
+            //    Id = task.Id,
+            //    StateOfUrgentId = task.StateOfUrgentId,
+            //    Description = task.Description,
+            //    Title = task.Title
+            //};
             ViewBag.State = new SelectList(_stateOfUrgentService.GetAll(), "Id", "Type", task.StateOfUrgentId);
-            return View(model);
+            return View(_mapper.Map<MyTaskUpdateDto>(task));
         }
         [HttpPost]
-        public IActionResult Edit(MyTaskUpdateVievModel model)
+        public IActionResult Edit(MyTaskUpdateDto model)
         {
             if (ModelState.IsValid)
             {
@@ -89,6 +92,8 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
                 });
                 return RedirectToAction(nameof(Index));
             }
+            //If Validation comes fail viewbag turn null thats why should writes here!
+            ViewBag.State = new SelectList(_stateOfUrgentService.GetAll(), "Id", "Type", model.StateOfUrgentId);
             return View(model);
         }
         public IActionResult Delete(int id)

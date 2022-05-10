@@ -1,4 +1,4 @@
-﻿@model AppUserListViewModel
+﻿@model AppUserListDto
 @{
     ViewBag.Title = "Index";
 }
@@ -21,9 +21,9 @@
         <input asp-for="Name" class="form-control"/>
     </div>
     <div class="form-group">
-        <label asp-for="SurName"></label>
-        <span asp-validation-for="SurName" class="text-danger"></span>
-        <input asp-for="SurName" class="form-control"/>
+        <label asp-for="Surname"></label>
+        <span asp-validation-for="Surname" class="text-danger"></span>
+        <input asp-for="Surname" class="form-control"/>
     </div>
     <div class="form-group">
         <label asp-for="UserName"></label>

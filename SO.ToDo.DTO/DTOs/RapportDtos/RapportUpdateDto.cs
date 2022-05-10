@@ -1,4 +1,6 @@
-﻿namespace SO.ToDo.DTO.DTOs.RapportDtos
+﻿using SO.ToDo.Entities.Concrete;
+
+namespace SO.ToDo.DTO.DTOs.RapportDtos
 {
     public class RapportUpdateDto
     {
@@ -6,6 +8,6 @@
         public string Details { get; set; }
         public string Title { get; set; }
         public int MyTaskId { get; set; }
-        // public MyTask MyTask { get; set; }
+        public MyTask MyTask { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model List<MyTaskListViewModel>
+﻿@model List<MyTaskListDto>
 @{
     ViewBag.Title = "Mytask Index";
 }
@@ -33,9 +33,8 @@ else
                             <td>@item.Id</td>
                             <td>@item.Title</td>
                             <td>@item.Description</td>
-                            <td>@item.CreatedTime.ToString("D")</td>
+                            <td>@item.CreatedTime.ToString("dd MMMM yyyy") / @item.CreatedTime.ToString("hh:mm:ss")</td>
                             <td>@item.StateOfUrgent.Type</td>
-
                             <td>
                                 <a asp-controller="MyTask" asp-action="Edit" class="btn btn-outline-success" asp-route-id="@item.Id">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
                                 <a href="/MyTask/Delete/@item.Id" data-toggle="modal" data-target="#DeleteModal" class="btn btn-outline-danger" data-id="@item.Id">Delete <i class="fa fa-trash" aria-hidden="true"></i></a>

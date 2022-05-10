@@ -1,4 +1,4 @@
-﻿@model UserTaskingListViewModel
+﻿@model UserTaskingListDto
 @{
     ViewData["Title"] = "Charge User";
 }
@@ -47,7 +47,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">
-                            @Model.AppUser.Name @Model.AppUser.SurName
+                            @Model.AppUser.Name @Model.AppUser.Surname
                         </h5>
                         <p class="card-text">
                             Has any task? :
