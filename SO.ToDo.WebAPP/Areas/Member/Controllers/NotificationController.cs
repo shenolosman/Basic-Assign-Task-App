@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
+    [Authorize(Roles = "Member")]
+    [Area("Member")]
     public class NotificationController : Controller
     {
-        [Authorize(Roles = "Member")]
-        [Area("Member")]
+
         public IActionResult GetNotification()
         {
             TempData["Active"] = "Notification";

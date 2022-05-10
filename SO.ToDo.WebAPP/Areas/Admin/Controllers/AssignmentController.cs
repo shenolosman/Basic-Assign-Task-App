@@ -13,16 +13,18 @@ public class AssignmentController : Controller
 {
     private readonly IAppUserService _appUserService;
     private readonly IFileService _fileService;
+    private readonly INotificationService _notificationService;
     private readonly IMyTaskService _myTaskService;
     private readonly UserManager<AppUser> _userManager;
 
     public AssignmentController(IAppUserService appUserService, IMyTaskService myTaskService,
-        UserManager<AppUser> userManager, IFileService fileService)
+        UserManager<AppUser> userManager, IFileService fileService, INotificationService notificationService)
     {
         _appUserService = appUserService;
         _myTaskService = myTaskService;
         _userManager = userManager;
         _fileService = fileService;
+        _notificationService = notificationService;
     }
 
     public async Task<IActionResult> Index()
@@ -84,6 +86,13 @@ public class AssignmentController : Controller
     {
         var updatedTask = _myTaskService.GetById(model.TaskId);
         updatedTask.AppUserId = model.UserId;
+
+        _notificationService.Add(new Notification()
+        {
+            AppUserId = model.UserId,
+            Comment = $"You assigned for this {updatedTask.Title} work."
+        });
+
         _myTaskService.Edit(updatedTask);
         return RedirectToAction(nameof(Index));
     }
