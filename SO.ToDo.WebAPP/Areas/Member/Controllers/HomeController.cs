@@ -14,12 +14,14 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         private readonly IMyTaskService _myTaskService;
         private readonly UserManager<AppUser> _userManager;
         private readonly IRapportService _rapportService;
+        private readonly INotificationService _notificationService;
 
-        public HomeController(IMyTaskService myTaskService, UserManager<AppUser> userManager, IRapportService rapportService)
+        public HomeController(IMyTaskService myTaskService, UserManager<AppUser> userManager, IRapportService rapportService, INotificationService notificationService)
         {
             _myTaskService = myTaskService;
             _userManager = userManager;
             _rapportService = rapportService;
+            _notificationService = notificationService;
         }
         public async Task<IActionResult> Index()
         {
@@ -43,11 +45,22 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             }
             return View(models);
         }
-        public IActionResult MakeDoneTask(int id)
+        public async Task<IActionResult> MakeDoneTask(int id)
         {
             var updateTask = _myTaskService.GetById(id);
             updateTask.IsDone = true;
             _myTaskService.Edit(updateTask);
+
+            var users = await _userManager.GetUsersInRoleAsync("Admin");
+            var activeUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            foreach (var admin in users)
+            {
+                _notificationService.Add(new Notification()
+                {
+                    AppUserId = admin.Id,
+                    Comment = $"{activeUser.Name} {activeUser.Surname} is done with report!"
+                });
+            }
             return Json(null);
         }
 
@@ -95,8 +108,9 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTaskReport(RapportAddViewModel model)
+        public async Task<IActionResult> AddTaskReport(RapportAddViewModel model)
         {
+
             //if (!ModelState.IsValid) return View(model);
             _rapportService.Add(new Rapport()
             {
@@ -104,6 +118,16 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
                 Details = model.Details,
                 MyTaskId = model.MyTaskId
             });
+            var users = await _userManager.GetUsersInRoleAsync("Admin");
+            var activeUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            foreach (var admin in users)
+            {
+                _notificationService.Add(new Notification()
+                {
+                    AppUserId = admin.Id,
+                    Comment = $"{activeUser.Name} {activeUser.Surname} created a new report!"
+                });
+            }
             return RedirectToAction(nameof(Index));
         }
     }
