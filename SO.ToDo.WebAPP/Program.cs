@@ -16,11 +16,13 @@ builder.Services.AddScoped<IRapportService, RapportManager>();
 builder.Services.AddScoped<IStateOfUrgentService, StateOfUrgentManager>();
 builder.Services.AddScoped<IAppUserService, AppUserManager>();
 builder.Services.AddScoped<IFileService, FileManager>();
+builder.Services.AddScoped<INotificationService, NotificationManager>();
 
 builder.Services.AddScoped<IMyTaskDAL, EfMyTaskRepository>();
 builder.Services.AddScoped<IStateOfUrgentDal, EfStateOfUrgentRepository>();
 builder.Services.AddScoped<IRapportDal, EfRapportRepository>();
 builder.Services.AddScoped<IAppUserDal, EfAppUserRepository>();
+builder.Services.AddScoped<INotificationDal, EfNotificationRepository>();
 
 builder.Services.AddDbContext<ToDoContext>();
 

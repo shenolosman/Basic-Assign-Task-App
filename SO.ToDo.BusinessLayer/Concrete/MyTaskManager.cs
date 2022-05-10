@@ -67,5 +67,10 @@ namespace SO.ToDo.BusinessLayer.Concrete
         {
             return _myTaskDal.GetAllTables(filter);
         }
+
+        public List<MyTask> GetAllTablesWithNotDone(out int totalPage, int userId, int activePage)
+        {
+            return _myTaskDal.GetAllTablesWithNotDone(out totalPage, userId, activePage);
+        }
     }
 }

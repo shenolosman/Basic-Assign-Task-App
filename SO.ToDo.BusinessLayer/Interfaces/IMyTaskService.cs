@@ -11,5 +11,7 @@ namespace SO.ToDo.BusinessLayer.Interfaces
         Task<List<MyTask>> GetByAppUserId(int userId);
         Task<MyTask> GetByReportId(int reportId);
         Task<List<MyTask>> GetAllTables(Expression<Func<MyTask, bool>> filter);
+        List<MyTask> GetAllTablesWithNotDone(out int totalPage, int userId, int activePage);
+
     }
 }

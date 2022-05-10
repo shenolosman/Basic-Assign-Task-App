@@ -50,11 +50,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             _myTaskService.Edit(updateTask);
             return Json(null);
         }
-        public IActionResult DoneTasks()
-        {
-            TempData["Active"] = "DoneTasks";
-            throw new NotImplementedException();
-        }
+
 
         public IActionResult Transmissions()
         {

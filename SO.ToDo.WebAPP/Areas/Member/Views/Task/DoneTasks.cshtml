@@ -1,0 +1,52 @@
+﻿@model List<MyTaskAllListViewModel>
+@{
+    ViewData["Title"] = "Index";
+    var count = 0;
+}
+
+@foreach (var item in Model)
+{
+    count++;
+    <div class="card my-1">
+        <div class="card-header">
+            <h4 class="text-center lead">@item.Title</h4>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title"><strong>State: </strong><span class="badge badge-info">@item.StateOfUrgent.Type</span></h5>
+            <p class="card-text">@item.Description</p>
+            <p class="text-right">
+                @if (item.Rapports.Count > 0)
+                {
+                    <a class="btn btn-light" data-toggle="collapse" href="#collapseReport-@count" role="button" aria-expanded="false" aria-controls="collapseReport">
+                        <i class="fa fa-arrow-down"></i> Reports <span class="badge badge-dark"> @item.Rapports.Count</span>
+                    </a>
+                }
+            </p>
+            <div class="collapse" id="collapseReport-@count">
+                <table class="table table-hover table-bordered table-sm">
+                    <tr>
+                        <th>Title</th>
+                        <th>Details</th>
+                    </tr>
+                    @foreach (var rapport in item.Rapports)
+                    {
+                        <tr>
+                            <td>@rapport.Title</td>
+                            <td>@rapport.Details</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        @for (int i = 1; i <= ViewBag.AllPage; i++)
+        {
+            <li class="page-item @(ViewBag.ActivePage==i?"active":"")">
+                <a class="page-link" asp-action="DoneTasks" asp-route-page="@i">@i</a>
+        </li>
+        }
+    </ul>
+</nav>

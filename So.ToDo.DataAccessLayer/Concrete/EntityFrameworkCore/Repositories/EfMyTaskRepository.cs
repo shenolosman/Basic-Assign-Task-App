@@ -23,6 +23,15 @@ namespace So.ToDo.DataAccessLayer.Concrete.EntityFrameworkCore.Repositories
                 .OrderByDescending(x => x.CreatedTime).ToListAsync();
         }
 
+        public List<MyTask> GetAllTablesWithNotDone(out int totalPage, int userId, int activePage = 1)
+        {
+            using var context = new ToDoContext();
+            var value = context.MyTasks.Include(x => x.StateOfUrgent).Include(x => x.Rapports).Include(x => x.AppUser).Where(x => x.AppUserId == userId && x.IsDone)
+                .OrderByDescending(x => x.CreatedTime);
+            totalPage = (int)Math.Ceiling((double)value.Count() / 3);
+            return value.Skip((activePage - 1) * 3).Take(3).ToList();
+        }
+
         public async Task<List<MyTask>> GetAllTables(Expression<Func<MyTask, bool>> filter)
         {
             await using var context = new ToDoContext();

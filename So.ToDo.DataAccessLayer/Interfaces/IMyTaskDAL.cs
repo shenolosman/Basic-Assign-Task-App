@@ -7,6 +7,7 @@ namespace So.ToDo.DataAccessLayer.Interfaces
     {
         Task<List<MyTask>> GetUnDoneStatesofUrgent();
         Task<List<MyTask>> GetAllTables();
+        List<MyTask> GetAllTablesWithNotDone(out int totalPage, int userId, int activePage);
         Task<List<MyTask>> GetAllTables(Expression<Func<MyTask, bool>> filter);
         Task<MyTask> GetStateOfUrgentWithId(int id);
 

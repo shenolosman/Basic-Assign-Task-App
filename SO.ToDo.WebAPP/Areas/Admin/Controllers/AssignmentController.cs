@@ -47,7 +47,6 @@ public class AssignmentController : Controller
 
         return View();
     }
-
     //s=search
     public async Task<IActionResult> AssignUser(int id, string s, int page = 1)
     {
