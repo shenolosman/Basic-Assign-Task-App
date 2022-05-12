@@ -85,5 +85,25 @@ namespace SO.ToDo.WebAPP.Controllers
             await _signInManager.SignOutAsync();
             return View(nameof(Index));
         }
+
+        public IActionResult StatusCode(int? code)
+        {
+            if (code == 404)
+            {
+                ViewBag.Code = code;
+                ViewBag.Message = "Page Not Found";
+            }
+            else if (code == 401)
+            {
+                ViewBag.Code = code;
+                ViewBag.Message = "Not Authorize";
+            }
+            else if (code == 400)
+            {
+                ViewBag.Code = code;
+                ViewBag.Message = "Bad Request";
+            }
+            return View();
+        }
     }
 }
