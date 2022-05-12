@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.BaseController;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
-    [Authorize(Roles = "Member")]
-    [Area("Member")]
+    [Authorize(Roles = RoleInfo.Member)]
+    [Area(AreaInfo.Member)]
     public class HomeController : BaseIdentityController
     {
         private readonly INotificationService _notificationService;
@@ -23,7 +24,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            TempData["Active"] = "Home";
+            TempData[TempDataInfo.Active] = TempDataInfo.Home;
             var user = await GetCurrentUserAsync();
             ViewBag.ReportCount = _rapportService.GetReportsByUserId(user.Id);
             ViewBag.CompletedTaskCount = _taskService.GetTaskCountCompletedWithUserId(user.Id);

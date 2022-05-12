@@ -6,11 +6,12 @@ using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.BaseController;
 using SO.ToDo.WebAPP.Service;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = RoleInfo.Admin)]
+    [Area(AreaInfo.Admin)]
     public class ProfileController : BaseIdentityController
     {
         private readonly IMapper _mapper;
@@ -22,7 +23,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            TempData["Active"] = "Profile";
+            TempData[TempDataInfo.Active] = TempDataInfo.Profile;
             var user = await GetCurrentUserAsync();
             //var model = new AppUserListViewModel
             //{

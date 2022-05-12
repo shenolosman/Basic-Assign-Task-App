@@ -12,8 +12,7 @@
         </button>
     </div>
 }
-
-<form asp-action="Index" method="post" class="w-75 mx-auto p-3" enctype="multipart/form-data">
+<form method="post" class="w-75 mx-auto p-3" enctype="multipart/form-data">
     <input type="hidden" value="@Model.Id" asp-for="Id" />
     <div class="form-group">
         <label asp-for="Name"></label>

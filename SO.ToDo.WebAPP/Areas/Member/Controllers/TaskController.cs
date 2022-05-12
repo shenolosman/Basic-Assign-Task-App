@@ -6,11 +6,12 @@ using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.BaseController;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
-    [Authorize(Roles = "Member")]
-    [Area("Member")]
+    [Authorize(Roles = RoleInfo.Member)]
+    [Area(AreaInfo.Member)]
     public class TaskController : BaseIdentityController
     {
         private readonly IMyTaskService _myTaskService;
@@ -23,7 +24,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         }
         public async Task<IActionResult> DoneTasks(int page = 1)
         {
-            TempData["Active"] = "DoneTasks";
+            TempData[TempDataInfo.Active] = TempDataInfo.DoneTasks;
             var user = await GetCurrentUserAsync();
             // var tasks = _myTaskService.GetAllTablesWithNotDone(out totalPage, user.Id, page);
             var task = _mapper.Map<List<MyTaskAllListDto>>(

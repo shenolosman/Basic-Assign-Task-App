@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.StateOfUrgentDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = RoleInfo.Admin)]
+    [Area(AreaInfo.Admin)]
     public class StateOfUrgentController : Controller
     {
         private readonly IStateOfUrgentService _stateOfUrgentService;
@@ -20,7 +21,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            TempData["Active"] = "StateOfUrgent";
+            TempData[TempDataInfo.Active] = TempDataInfo.StateOfUrgent;
             //var list = _stateOfUrgentService.GetAll();
 
             //var model = new List<StateOfUrgentListViewModel>();
@@ -37,7 +38,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
         public IActionResult Add()
         {
-            TempData["Active"] = "StateOfUrgent";
+            TempData[TempDataInfo.Active] = TempDataInfo.StateOfUrgent;
             return View(new StateOfUrgentAddDto());
         }
         [HttpPost]
@@ -52,7 +53,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
         public IActionResult Edit(int id)
         {
-            TempData["Active"] = "StateOfUrgent";
+            TempData[TempDataInfo.Active] = TempDataInfo.StateOfUrgent;
             return View(_mapper.Map<StateOfUrgentUpdateDto>(_stateOfUrgentService.GetById(id)));
         }
 

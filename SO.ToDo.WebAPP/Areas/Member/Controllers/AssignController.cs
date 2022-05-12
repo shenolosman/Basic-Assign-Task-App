@@ -7,11 +7,12 @@ using SO.ToDo.DTO.DTOs.RapportDtos;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.BaseController;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
-    [Authorize(Roles = "Member")]
-    [Area("Member")]
+    [Authorize(Roles = RoleInfo.Member)]
+    [Area(AreaInfo.Member)]
     public class AssignController : BaseIdentityController
     {
         private readonly IMyTaskService _myTaskService;
@@ -28,7 +29,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            TempData["Active"] = "Assign";
+            TempData[TempDataInfo.Active] = TempDataInfo.Assign;
             var user = await GetCurrentUserAsync();
             //var task = await _myTaskService.GetAllTables(x => x.AppUserId == user.Id && !x.IsDone);
             //var models = new List<MyTaskAllListViewModel>();
@@ -57,7 +58,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             updateTask.IsDone = true;
             _myTaskService.Edit(updateTask);
 
-            var users = await _userManager.GetUsersInRoleAsync("Admin");
+            var users = await _userManager.GetUsersInRoleAsync(RoleInfo.Admin);
             var activeUser = await GetCurrentUserAsync();
             foreach (var admin in users)
             {
@@ -71,7 +72,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         }
         public IActionResult EditTasksRapport(int id)
         {
-            TempData["Active"] = "Assign";
+            TempData[TempDataInfo.Active] = TempDataInfo.Assign;
             //var report = _rapportService.GetByTaskId(id);
             //var model = new RapportUpdateViewModel
             //{
@@ -96,7 +97,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         }
         public IActionResult AddTaskReport(int id)
         {
-            TempData["Active"] = "Assign";
+            TempData[TempDataInfo.Active] = TempDataInfo.Assign;
             var task = _myTaskService.GetAllTables().Result.Find(x => x.Id == id);
             var model = new RapportAddDto
             {
@@ -116,7 +117,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
                 Details = model.Details,
                 MyTaskId = model.MyTaskId
             });
-            var users = await _userManager.GetUsersInRoleAsync("Admin");
+            var users = await _userManager.GetUsersInRoleAsync(RoleInfo.Admin);
             var activeUser = await GetCurrentUserAsync();
             foreach (var admin in users)
             {

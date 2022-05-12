@@ -5,11 +5,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
 {
-    [Authorize(Roles = "Admin")]
-    [Area("Admin")]
+    [Authorize(Roles = RoleInfo.Admin)]
+    [Area(AreaInfo.Admin)]
     public class MyTaskController : Controller
     {
         private readonly IMyTaskService _myTaskService;
@@ -23,7 +24,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            TempData["Active"] = "MyTask";
+            TempData[TempDataInfo.Active] = TempDataInfo.MyTask;
             //var tasks = _myTaskService.GetUnDoneStatesofUrgent();
             //var models = new List<MyTaskListViewModel>();
             //foreach (var item in tasks.Result)
@@ -44,7 +45,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
         public IActionResult Add()
         {
-            TempData["Active"] = "MyTask";
+            TempData[TempDataInfo.Active] = TempDataInfo.MyTask;
             ViewBag.States = new SelectList(_stateOfUrgentService.GetAll(), "Id", "Type");
             return View(new MyTaskAddDto());
         }
@@ -65,7 +66,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
         public IActionResult Edit(int id)
         {
-            TempData["Active"] = "MyTask";
+            TempData[TempDataInfo.Active] = TempDataInfo.MyTask;
             var task = _myTaskService.GetById(id);
             //var model = new MyTaskUpdateVievModel
             //{

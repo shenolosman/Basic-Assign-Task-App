@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SO.ToDo.BusinessLayer.Interfaces;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers;
-[Authorize(Roles = "Admin")]
-[Area("Admin")]
+[Authorize(Roles = RoleInfo.Admin)]
+[Area(AreaInfo.Admin)]
 public class GraphicController : Controller
 {
     private readonly IAppUserService _appUserService;
@@ -15,7 +16,7 @@ public class GraphicController : Controller
     }
     public IActionResult Index()
     {
-        TempData["Active"] = "Graphic";
+        TempData[TempDataInfo.Active] = TempDataInfo.Graphic;
         return View();
     }
     public IActionResult MostDoneTask()

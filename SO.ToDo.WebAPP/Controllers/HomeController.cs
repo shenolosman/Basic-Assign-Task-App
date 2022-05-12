@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.BaseController;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Controllers
 {
@@ -21,9 +22,10 @@ namespace SO.ToDo.WebAPP.Controllers
         [HttpPost]
         public async Task<IActionResult> LogIn(AppUserSignInDto model)
         {
+            var user = await _userManager.FindByNameAsync(model.UserName);
             if (ModelState.IsValid)
             {
-                var user = await GetCurrentUserAsync();
+
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -31,7 +33,7 @@ namespace SO.ToDo.WebAPP.Controllers
                     if (result.Succeeded)
                     {
                         var roles = await _userManager.GetRolesAsync(user);
-                        if (roles.Contains("Admin"))
+                        if (roles.Contains(RoleInfo.Admin))
                         {
                             return RedirectToAction("Index", "Home", new { area = "Admin" });
                         }
@@ -64,11 +66,9 @@ namespace SO.ToDo.WebAPP.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    var roleResult = await _userManager.AddToRoleAsync(user, "Member");
+                    var roleResult = await _userManager.AddToRoleAsync(user, RoleInfo.Member);
                     if (roleResult.Succeeded)
                     {
-                        var userId = await _userManager.GetUserIdAsync(user);
-
                         await _signInManager.SignInAsync(user, false);
                         return RedirectToAction("Index", "Home", new { area = "Member" });
                     }

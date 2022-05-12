@@ -7,11 +7,12 @@ using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.BaseController;
+using SO.ToDo.WebAPP.StringInfo;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers;
 
-[Authorize(Roles = "Admin")]
-[Area("Admin")]
+[Authorize(Roles = RoleInfo.Admin)]
+[Area(AreaInfo.Admin)]
 public class AssignmentController : BaseIdentityController
 {
     private readonly IAppUserService _appUserService;
@@ -30,7 +31,7 @@ public class AssignmentController : BaseIdentityController
     }
     public async Task<IActionResult> Index()
     {
-        TempData["Active"] = "Assignment";
+        TempData[TempDataInfo.Active] = TempDataInfo.Assignment;
         //var myTasks = await _myTaskService.GetAllTables();
         //var models = myTasks.Select(item => new MyTaskAllListViewModel
         //{
@@ -48,7 +49,7 @@ public class AssignmentController : BaseIdentityController
     //s=search
     public async Task<IActionResult> AssignUser(int id, string s, int page = 1)
     {
-        TempData["Active"] = "Assignment";
+        TempData[TempDataInfo.Active] = TempDataInfo.Assignment;
         ViewBag.ActivePage = page;
         ViewBag.Searched = s;
         var users =
@@ -96,7 +97,7 @@ public class AssignmentController : BaseIdentityController
 
     public async Task<IActionResult> Detail(int id)
     {
-        TempData["Active"] = "Assignment";
+        TempData[TempDataInfo.Active] = TempDataInfo.Assignment;
         //var task = await _myTaskService.GetByReportId(id);
         //var model = new MyTaskAllListViewModel
         //{
@@ -111,7 +112,7 @@ public class AssignmentController : BaseIdentityController
 
     public IActionResult ChargeUser(UserTaskingDto model)
     {
-        TempData["Active"] = "Assignment";
+        TempData[TempDataInfo.Active] = TempDataInfo.Assignment;
         //var user = _userManager.Users.FirstOrDefault(x => x.Id == model.UserId);
         //var task = _myTaskService.GetStateOfUrgentWithId(model.TaskId).Result;
 
