@@ -6,7 +6,6 @@ using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
-using SO.ToDo.WebAPP.Areas.Admin.Models;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers;
 
@@ -86,7 +85,7 @@ public class AssignmentController : Controller
     }
 
     [HttpPost]
-    public IActionResult AssignUser(UserTaskingViewModel model)
+    public IActionResult AssignUser(UserTaskingDto model)
     {
         var updatedTask = _myTaskService.GetById(model.TaskId);
         updatedTask.AppUserId = model.UserId;
@@ -116,7 +115,7 @@ public class AssignmentController : Controller
         return View(_mapper.Map<MyTaskAllListDto>(await _myTaskService.GetByReportId(id)));
     }
 
-    public IActionResult ChargeUser(UserTaskingViewModel model)
+    public IActionResult ChargeUser(UserTaskingDto model)
     {
         TempData["Active"] = "Assignment";
         //var user = _userManager.Users.FirstOrDefault(x => x.Id == model.UserId);
