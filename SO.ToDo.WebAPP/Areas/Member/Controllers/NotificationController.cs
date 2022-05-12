@@ -5,27 +5,26 @@ using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.NotificationDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.BaseController;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
     [Authorize(Roles = "Member")]
     [Area("Member")]
-    public class NotificationController : Controller
+    public class NotificationController : BaseIdentityController
     {
         private readonly INotificationService _notificationService;
-        private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
 
-        public NotificationController(INotificationService notificationService, UserManager<AppUser> userManager, IMapper mapper)
+        public NotificationController(INotificationService notificationService, UserManager<AppUser> userManager, IMapper mapper) : base(userManager)
         {
             _notificationService = notificationService;
-            _userManager = userManager;
             _mapper = mapper;
         }
         public async Task<IActionResult> GetNotification()
         {
             TempData["Active"] = "Notification";
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await GetCurrentUserAsync();
             //var notification = _notificationService.GetNotRead(user.Id);
             //var models = new List<NotificationListViewModel>();
             //foreach (var item in notification)

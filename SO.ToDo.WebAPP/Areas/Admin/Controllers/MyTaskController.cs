@@ -15,7 +15,6 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         private readonly IMyTaskService _myTaskService;
         private readonly IStateOfUrgentService _stateOfUrgentService;
         private readonly IMapper _mapper;
-
         public MyTaskController(IMyTaskService myTaskService, IStateOfUrgentService stateOfUrgentService, IMapper mapper)
         {
             _myTaskService = myTaskService;

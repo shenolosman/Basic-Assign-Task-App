@@ -13,7 +13,6 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
     {
         private readonly IStateOfUrgentService _stateOfUrgentService;
         private readonly IMapper _mapper;
-
         public StateOfUrgentController(IStateOfUrgentService stateOfUrgentService, IMapper mapper)
         {
             _stateOfUrgentService = stateOfUrgentService;
@@ -36,7 +35,6 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
             //}
             return View(_mapper.Map<List<StateOfUrgentListDto>>(_stateOfUrgentService.GetAll()));
         }
-
         public IActionResult Add()
         {
             TempData["Active"] = "StateOfUrgent";
@@ -70,7 +68,6 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
                 });
                 return RedirectToAction(nameof(Index));
             }
-
             return View(model);
         }
     }

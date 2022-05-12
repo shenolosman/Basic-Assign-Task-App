@@ -2,30 +2,28 @@
 using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.BaseController;
 
 namespace SO.ToDo.WebAPP.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseIdentityController
     {
-        private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
 
-        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : base(userManager)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
         }
         public IActionResult Index()
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> LogIn(AppUserSignInDto model)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.UserName);
+                var user = await GetCurrentUserAsync();
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -41,7 +39,6 @@ namespace SO.ToDo.WebAPP.Controllers
                         {
                             return RedirectToAction("Index", "Home", new { area = "Member" });
                         }
-
                     }
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt!");
@@ -74,18 +71,10 @@ namespace SO.ToDo.WebAPP.Controllers
 
                         await _signInManager.SignInAsync(user, false);
                         return RedirectToAction("Index", "Home", new { area = "Member" });
-
                     }
-                    foreach (var item in roleResult.Errors)
-                    {
-                        ModelState.AddModelError("", item.Description);
-                    }
+                    AddError(roleResult.Errors);
                 }
-
-                foreach (var item in result.Errors)
-                {
-                    ModelState.AddModelError(item.Code, item.Description);
-                }
+                AddError(result.Errors);
             }
             return View(model);
         }

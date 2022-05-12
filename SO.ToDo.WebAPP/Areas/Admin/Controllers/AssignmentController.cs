@@ -6,31 +6,28 @@ using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.BaseController;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers;
 
 [Authorize(Roles = "Admin")]
 [Area("Admin")]
-public class AssignmentController : Controller
+public class AssignmentController : BaseIdentityController
 {
     private readonly IAppUserService _appUserService;
     private readonly IFileService _fileService;
     private readonly INotificationService _notificationService;
     private readonly IMapper _mapper;
     private readonly IMyTaskService _myTaskService;
-    private readonly UserManager<AppUser> _userManager;
-
     public AssignmentController(IAppUserService appUserService, IMyTaskService myTaskService,
-        UserManager<AppUser> userManager, IFileService fileService, INotificationService notificationService, IMapper mapper)
+        UserManager<AppUser> userManager, IFileService fileService, INotificationService notificationService, IMapper mapper) : base(userManager)
     {
         _appUserService = appUserService;
         _myTaskService = myTaskService;
-        _userManager = userManager;
         _fileService = fileService;
         _notificationService = notificationService;
         _mapper = mapper;
     }
-
     public async Task<IActionResult> Index()
     {
         TempData["Active"] = "Assignment";
@@ -69,8 +66,6 @@ public class AssignmentController : Controller
         //    .ToList();
         //ViewBag.Users = userListModel;
         ViewBag.Users = users;
-
-
         //var myTask = await _myTaskService.GetStateOfUrgentWithId(id);
         //var taskModel = new MyTaskListViewModel
         //{
@@ -80,7 +75,6 @@ public class AssignmentController : Controller
         //    Description = myTask.Description,
         //    Title = myTask.Title
         //};
-
         return View(_mapper.Map<MyTaskListDto>(await _myTaskService.GetStateOfUrgentWithId(id)));
     }
 
@@ -120,8 +114,6 @@ public class AssignmentController : Controller
         TempData["Active"] = "Assignment";
         //var user = _userManager.Users.FirstOrDefault(x => x.Id == model.UserId);
         //var task = _myTaskService.GetStateOfUrgentWithId(model.TaskId).Result;
-
-
 
         var userModel = _mapper.Map<AppUserListDto>(_userManager.Users.FirstOrDefault(x => x.Id == model.UserId));
         //var userModel = new AppUserListViewModel

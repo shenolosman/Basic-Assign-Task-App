@@ -4,28 +4,26 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.BaseController;
 using SO.ToDo.WebAPP.Service;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
     [Authorize(Roles = "Member")]
     [Area("Member")]
-    public class ProfileController : Controller
+    public class ProfileController : BaseIdentityController
     {
-        private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly GeneralHandler _generalHandler;
-
-        public ProfileController(UserManager<AppUser> userManager, IMapper mapper, GeneralHandler generalHandler)
+        public ProfileController(UserManager<AppUser> userManager, IMapper mapper, GeneralHandler generalHandler) : base(userManager)
         {
-            _userManager = userManager;
             _mapper = mapper;
             _generalHandler = generalHandler;
         }
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = "Profile";
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = GetCurrentUserAsync();
             //var model = new AppUserListViewModel
             //{
             //    Email = user.Email,
@@ -38,7 +36,6 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             var model = _mapper.Map<AppUserListDto>(user);
             return View(model);
         }
-
         [HttpPost]
         public async Task<IActionResult> Index(AppUserListDto model)
         {

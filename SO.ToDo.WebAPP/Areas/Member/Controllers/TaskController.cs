@@ -5,31 +5,29 @@ using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.BaseController;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
     [Authorize(Roles = "Member")]
     [Area("Member")]
-    public class TaskController : Controller
+    public class TaskController : BaseIdentityController
     {
         private readonly IMyTaskService _myTaskService;
-        private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
 
-        public TaskController(IMyTaskService myTaskService, UserManager<AppUser> userManager, IMapper mapper)
+        public TaskController(IMyTaskService myTaskService, UserManager<AppUser> userManager, IMapper mapper) : base(userManager)
         {
             _myTaskService = myTaskService;
-            _userManager = userManager;
             _mapper = mapper;
         }
         public async Task<IActionResult> DoneTasks(int page = 1)
         {
             TempData["Active"] = "DoneTasks";
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            int totalPage;
+            var user = await GetCurrentUserAsync();
             // var tasks = _myTaskService.GetAllTablesWithNotDone(out totalPage, user.Id, page);
             var task = _mapper.Map<List<MyTaskAllListDto>>(
-                _myTaskService.GetAllTablesWithNotDone(out totalPage, user.Id, page));
+                _myTaskService.GetAllTablesWithNotDone(out var totalPage, user.Id, page));
 
             ViewBag.AllPage = totalPage;
             ViewBag.ActivePage = page;

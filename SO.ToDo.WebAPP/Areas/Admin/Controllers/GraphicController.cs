@@ -9,7 +9,6 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers;
 public class GraphicController : Controller
 {
     private readonly IAppUserService _appUserService;
-
     public GraphicController(IAppUserService appUserService)
     {
         _appUserService = appUserService;
@@ -19,7 +18,6 @@ public class GraphicController : Controller
         TempData["Active"] = "Graphic";
         return View();
     }
-
     public IActionResult MostDoneTask()
     {
         var jsonString = JsonConvert.SerializeObject(_appUserService.GetUsersMostDoneTask());

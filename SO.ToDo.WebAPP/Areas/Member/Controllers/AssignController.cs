@@ -6,23 +6,22 @@ using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.RapportDtos;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.BaseController;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
     [Authorize(Roles = "Member")]
     [Area("Member")]
-    public class AssignController : Controller
+    public class AssignController : BaseIdentityController
     {
         private readonly IMyTaskService _myTaskService;
-        private readonly UserManager<AppUser> _userManager;
         private readonly IRapportService _rapportService;
         private readonly INotificationService _notificationService;
         private readonly IMapper _mapper;
 
-        public AssignController(IMyTaskService myTaskService, UserManager<AppUser> userManager, IRapportService rapportService, INotificationService notificationService, IMapper mapper)
+        public AssignController(IMyTaskService myTaskService, UserManager<AppUser> userManager, IRapportService rapportService, INotificationService notificationService, IMapper mapper) : base(userManager)
         {
             _myTaskService = myTaskService;
-            _userManager = userManager;
             _rapportService = rapportService;
             _notificationService = notificationService;
             _mapper = mapper;
@@ -30,7 +29,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
         public async Task<IActionResult> Index()
         {
             TempData["Active"] = "Assign";
-            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await GetCurrentUserAsync();
             //var task = await _myTaskService.GetAllTables(x => x.AppUserId == user.Id && !x.IsDone);
             //var models = new List<MyTaskAllListViewModel>();
             //foreach (var item in task)
@@ -59,7 +58,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
             _myTaskService.Edit(updateTask);
 
             var users = await _userManager.GetUsersInRoleAsync("Admin");
-            var activeUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var activeUser = await GetCurrentUserAsync();
             foreach (var admin in users)
             {
                 _notificationService.Add(new Notification()
@@ -118,7 +117,7 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
                 MyTaskId = model.MyTaskId
             });
             var users = await _userManager.GetUsersInRoleAsync("Admin");
-            var activeUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            var activeUser = await GetCurrentUserAsync();
             foreach (var admin in users)
             {
                 _notificationService.Add(new Notification()
