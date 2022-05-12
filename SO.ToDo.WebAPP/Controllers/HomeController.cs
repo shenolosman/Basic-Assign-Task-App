@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.Entities.Concrete;
-using SO.ToDo.WebAPP.Models;
 
 namespace SO.ToDo.WebAPP.Controllers
 {
@@ -21,11 +21,11 @@ namespace SO.ToDo.WebAPP.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogIn(AppUserSignInModel model)
+        public async Task<IActionResult> LogIn(AppUserSignInDto model)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByNameAsync(model.Username);
+                var user = await _userManager.FindByNameAsync(model.UserName);
                 if (user != null)
                 {
                     var result = await _signInManager.PasswordSignInAsync(user, model.Password, model.RememberMe, lockoutOnFailure: false);
@@ -50,10 +50,10 @@ namespace SO.ToDo.WebAPP.Controllers
         }
         public IActionResult Register()
         {
-            return View(new AppUserAddViewModel());
+            return View(new AppUserAddDto());
         }
         [HttpPost]
-        public async Task<IActionResult> Register(AppUserAddViewModel model)
+        public async Task<IActionResult> Register(AppUserAddDto model)
         {
             if (ModelState.IsValid)
             {
