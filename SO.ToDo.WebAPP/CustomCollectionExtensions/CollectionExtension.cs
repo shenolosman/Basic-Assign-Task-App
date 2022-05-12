@@ -1,4 +1,6 @@
 ﻿using FluentValidation;
+using SO.ToDo.BusinessLayer.CustomLogger;
+using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.BusinessLayer.ValidationRules.FluentValidation;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.DTO.DTOs.RapportDtos;
@@ -19,6 +21,7 @@ namespace SO.ToDo.WebAPP.CustomCollectionExtensions
             services.AddTransient<IValidator<RapportAddDto>, RapportAddValidator>();
             services.AddTransient<IValidator<RapportUpdateDto>, RapportUpdateValidator>();
             services.AddTransient<IValidator<MyTaskAddDto>, TaskAddValidator>();
+            services.AddTransient<ICustomLogger, NLogLogger>();
         }
         public static void AddCookieContainer(this IServiceCollection services)
         {

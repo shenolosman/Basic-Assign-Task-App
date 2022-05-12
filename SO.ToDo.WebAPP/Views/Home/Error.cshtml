@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Error";
+    Layout = "~/Views/Shared/_StandartLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-6">
+        <img src="https://placeimg.com/640/480/any" class="w-100 img-fluid">
+    </div>
+    <div class="col-md-6">
+        <h1>Sorry for trouble! We got issue and we already sent the error our technical department. Please Visit Later...</h1>
+        <p class="text-danger">Error Path: @ViewBag.Path</p>
+        <p class="text-danger">Error Message: @ViewBag.Message</p>
+    </div>
+</div>

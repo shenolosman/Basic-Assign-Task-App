@@ -34,15 +34,20 @@ builder.Services.AddControllersWithViews().AddFluentValidation();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error");
+    app.UseDeveloperExceptionPage();
+}
+else
+{
+    app.UseExceptionHandler("/Home/Error");
 }
 
-app.UseStatusCodePages("/Home/StatusCode", "?code={0}");
 app.UseStaticFiles();
-
 app.UseRouting();
+
+app.UseStatusCodePages("/Home/StatusCode", "?code={0}");
+
 app.UseAuthentication();
 app.UseAuthorization();
 

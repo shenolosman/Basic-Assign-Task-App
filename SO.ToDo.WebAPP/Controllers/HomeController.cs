@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.BaseController;
@@ -10,10 +12,12 @@ namespace SO.ToDo.WebAPP.Controllers
     public class HomeController : BaseIdentityController
     {
         private readonly SignInManager<AppUser> _signInManager;
+        private readonly ICustomLogger _customLogger;
 
-        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager) : base(userManager)
+        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, ICustomLogger customLogger) : base(userManager)
         {
             _signInManager = signInManager;
+            _customLogger = customLogger;
         }
         public IActionResult Index()
         {
@@ -104,6 +108,23 @@ namespace SO.ToDo.WebAPP.Controllers
                 ViewBag.Message = "Bad Request";
             }
             return View();
+        }
+
+        public IActionResult Error()
+        {
+            var exceptionHandlar = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            //adding my custom logger file here
+            _customLogger.LogError($"The error occoured place is { exceptionHandlar.Path}\n Message is: {exceptionHandlar.Error.Message} \n Stack Trace is: {exceptionHandlar.Error.StackTrace}");
+
+            ViewBag.Path = exceptionHandlar.Path;
+            ViewBag.Message = exceptionHandlar.Error.Message;
+            return View();
+        }
+
+        public void hata()
+        {
+            throw new Exception("bu bir hata");
         }
     }
 }
