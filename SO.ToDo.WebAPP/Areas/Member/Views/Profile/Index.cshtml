@@ -1,12 +1,12 @@
-﻿@model AppUserListViewModel
+﻿@model AppUserListDto
 @{
-    ViewBag.Title = "Index";
+    ViewData["Title"] = "Profile | Edit";
 }
 <h1>Profile index</h1>
-@if (TempData["m"] != null)
+@if (TempData["update"] != null)
 {
     <div class="alert alert-primary alert-dismissible fade show" role="alert">
-        <strong>@TempData["m"]</strong> 
+        <strong>@TempData["update"]</strong> 
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -21,9 +21,9 @@
         <input asp-for="Name" class="form-control"/>
     </div>
     <div class="form-group">
-        <label asp-for="SurName"></label>
-        <span asp-validation-for="SurName" class="text-danger"></span>
-        <input asp-for="SurName" class="form-control"/>
+        <label asp-for="Surname"></label>
+        <span asp-validation-for="Surname" class="text-danger"></span>
+        <input asp-for="Surname" class="form-control"/>
     </div>
     <div class="form-group">
         <label asp-for="UserName"></label>
@@ -38,7 +38,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-4 offset-2">
-                <h5 class="text-center">Your image :</h5>
+                <h5 class="text-center">Your image : </h5>
                 <img src="~/img/@Model.Picture" class="w-100" alt="@Model.Name"/>
             </div>
             <div class="col-md-4 offset-2">
@@ -48,12 +48,13 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <label class="form-label">Select image :</label>
-                <input type="file" name="image" class="form-control-file" id="selectedImage"/>
+                <input asp-for="ImageFile" class="form-control-file" accept=".jpg,.png,.jpeg,.gif" id="selectedImage"/>
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
         </div>
     </div>
     <div class="form-group">
+        @{TempData["Picture"]=Model.Picture;}
         <button class="btn btn-outline-primary" type="submit">Save <i class="fas fa-save"></i></button>
     </div>
 </form>

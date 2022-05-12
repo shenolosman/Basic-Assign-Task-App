@@ -1,4 +1,4 @@
-﻿@model AppUserSignInModel
+﻿@model AppUserSignInDto
 @{
     ViewData["Title"] = "Login";
 }
@@ -9,9 +9,9 @@
 <br/>
 <form class="w-50 mx-auto shadow" method="post" style="padding: 10px 10px" asp-action="LogIn">
     <div class="mb-2" style="padding: 0 10px">
-        <label asp-for="Username" class="form-label"></label>
-        <span asp-validation-for="Username" class="text-danger"></span>
-        <input asp-for="Username" type="text" class="form-control"/>
+        <label asp-for="UserName" class="form-label"></label>
+        <span asp-validation-for="UserName" class="text-danger"></span>
+        <input asp-for="UserName" type="text" class="form-control"/>
     </div>
     <div class="mb-2" style="padding: 0 10px">
         <label asp-for="Password" class="form-label"></label>

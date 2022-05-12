@@ -14,6 +14,7 @@ using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP;
 using SO.ToDo.WebAPP.Mapping.AutoMapperProfile;
+using SO.ToDo.WebAPP.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,7 @@ builder.Services.AddScoped<IStateOfUrgentDal, EfStateOfUrgentRepository>();
 builder.Services.AddScoped<IRapportDal, EfRapportRepository>();
 builder.Services.AddScoped<IAppUserDal, EfAppUserRepository>();
 builder.Services.AddScoped<INotificationDal, EfNotificationRepository>();
+builder.Services.AddScoped<GeneralHandler>();
 
 builder.Services.AddAutoMapper(typeof(MapProfile));
 

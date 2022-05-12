@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.BusinessLayer.Interfaces;
+using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
-using SO.ToDo.WebAPP.Areas.Admin.Models;
 
 namespace SO.ToDo.WebAPP.Areas.Member.Controllers
 {
@@ -13,37 +14,41 @@ namespace SO.ToDo.WebAPP.Areas.Member.Controllers
     {
         private readonly IMyTaskService _myTaskService;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IMapper _mapper;
 
-        public TaskController(IMyTaskService myTaskService, UserManager<AppUser> userManager)
+        public TaskController(IMyTaskService myTaskService, UserManager<AppUser> userManager, IMapper mapper)
         {
             _myTaskService = myTaskService;
             _userManager = userManager;
+            _mapper = mapper;
         }
-        public async Task<IActionResult> DoneTasks(int id, string s, int page = 1)
+        public async Task<IActionResult> DoneTasks(int page = 1)
         {
             TempData["Active"] = "DoneTasks";
-            ViewBag.ActivePage = page;
-            //ViewBag.Searched = s;
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             int totalPage;
-            var tasks = _myTaskService.GetAllTablesWithNotDone(out totalPage, user.Id, page);
+            // var tasks = _myTaskService.GetAllTablesWithNotDone(out totalPage, user.Id, page);
+            var task = _mapper.Map<List<MyTaskAllListDto>>(
+                _myTaskService.GetAllTablesWithNotDone(out totalPage, user.Id, page));
+
             ViewBag.AllPage = totalPage;
-            var models = new List<MyTaskAllListViewModel>();
-            foreach (var item in tasks)
-            {
-                var model = new MyTaskAllListViewModel()
-                {
-                    Description = item.Description,
-                    AppUser = item.AppUser,
-                    CreatedTime = item.CreatedTime,
-                    Id = item.Id,
-                    Rapports = item.Rapports,
-                    StateOfUrgent = item.StateOfUrgent,
-                    Title = item.Title
-                };
-                models.Add(model);
-            }
-            return View(models);
+            ViewBag.ActivePage = page;
+            //var models = new List<MyTaskAllListViewModel>();
+            //foreach (var item in tasks)
+            //{
+            //    var model = new MyTaskAllListViewModel()
+            //    {
+            //        Description = item.Description,
+            //        AppUser = item.AppUser,
+            //        CreatedTime = item.CreatedTime,
+            //        Id = item.Id,
+            //        Rapports = item.Rapports,
+            //        StateOfUrgent = item.StateOfUrgent,
+            //        Title = item.Title
+            //    };
+            //    models.Add(model);
+            //}
+            return View(task);
         }
     }
 }

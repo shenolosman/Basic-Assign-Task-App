@@ -1,4 +1,7 @@
-﻿namespace SO.ToDo.DTO.DTOs.AppUserDtos
+﻿using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SO.ToDo.DTO.DTOs.AppUserDtos
 {
     public class AppUserListDto
     {
@@ -11,5 +14,7 @@
         //   [Display(Name = "Email")]
         public string Email { get; set; }
         public string? Picture { get; set; }
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
     }
 }

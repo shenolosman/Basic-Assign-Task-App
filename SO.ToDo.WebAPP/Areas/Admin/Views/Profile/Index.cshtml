@@ -38,7 +38,7 @@
     <div class="form-group">
         <div class="row">
             <div class="col-md-4 offset-2">
-                <h5 class="text-center">Your image :</h5>
+                <h5 class="text-center">Your image : </h5>
                 <img src="~/img/@Model.Picture" class="w-100" alt="@Model.Name"/>
             </div>
             <div class="col-md-4 offset-2">
@@ -48,12 +48,13 @@
                 </div>
             </div>
             <div class="col-md-12">
-                <label class="form-label">Select image :</label>
-                <input type="file" name="image" class="form-control-file" id="selectedImage"/>
+                <input asp-for="ImageFile" class="form-control-file" accept=".jpg,.png,.jpeg,.gif" id="selectedImage"/>
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
             </div>
         </div>
     </div>
     <div class="form-group">
+        @{TempData["Picture"]=Model.Picture;}
         <button class="btn btn-outline-primary" type="submit">Save <i class="fas fa-save"></i></button>
     </div>
 </form>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
 using SO.ToDo.Entities.Concrete;
+using SO.ToDo.WebAPP.Service;
 
 namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
 {
@@ -13,11 +14,13 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly GeneralHandler _generalHandler;
 
-        public ProfileController(UserManager<AppUser> userManager, IMapper mapper)
+        public ProfileController(UserManager<AppUser> userManager, IMapper mapper, GeneralHandler generalHandler)
         {
             _userManager = userManager;
             _mapper = mapper;
+            _generalHandler = generalHandler;
         }
 
         public async Task<IActionResult> Index()
@@ -38,21 +41,13 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        //name="image" variable comes from img to equal iformfile
-        public async Task<IActionResult> Index(AppUserListDto model, IFormFile image)
+        public async Task<IActionResult> Index(AppUserListDto model)
         {
             if (ModelState.IsValid)
             {
                 var user = _userManager.Users.FirstOrDefault(x => x.Id == model.Id);
-                if (image != null)
-                {
-                    var extension = Path.GetExtension(image.FileName);
-                    var imgName = Guid.NewGuid() + extension;
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/img/" + imgName);
-                    await using var stream = new FileStream(path, FileMode.Create);
-                    await image.CopyToAsync(stream);
-                    user.Picture = imgName;
-                }
+                model.Picture = (string?)TempData["Picture"];
+                user.Picture = await _generalHandler.SaveImageFile(model.ImageFile, model.Picture);
                 user.Name = model.Name;
                 user.Surname = model.Surname;
                 user.Email = model.Email;

@@ -1,27 +1,14 @@
-﻿@model RapportAddViewModel
+﻿@model RapportAddDto
 @{
     ViewData["Title"] = "Add Task Report";
 }
-<div class="card">
-    <div class="card-header">
-        <h5 class="text-center">Add new report to :</h5>
-    </div>
+<div class="card my-3">
+    <div class="card-header">@Model.MyTask.Title</div>
     <div class="card-body">
-        <p class="card-text">
-            <span class="text-danger">Task name:</span>
-            <label asp-for="@Model.MyTask.Title"></label>
-        </p>
-        <p class="card-text">
-            <span class="text-danger">Task description:</span> 
-            <label asp-for="@Model.MyTask.Description"></label>
-        </p>
-        <p class="card-text">
-            <span class="text-danger">Task state type:</span> 
-            <label asp-for="@Model.MyTask.StateOfUrgent.Type"></label>
-        </p>
+        <div class="card-title">State: @Model.MyTask.StateOfUrgent.Type</div>
+        <div class="card-text">@Model.MyTask.Description</div>
     </div>
 </div>
-
 <form class="w-50 mx-auto" method="post">
     <input type="hidden" asp-for="@Model.MyTaskId" />
     <input type="hidden" asp-for="@Model.MyTask" />
@@ -40,6 +27,4 @@
     <button type="submit" class="btn btn-primary btn-lg">Add <i class="fa fa-save" aria-hidden="true"></i></button> | <a class="btn btn-outline-primary" asp-area="Member" asp-controller="Assign" asp-action="Index">Go Back</a>
 </form>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+@section Scripts {@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}}
