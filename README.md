@@ -1,6 +1,6 @@
 # *Basic ToDo/Job Management Project With User and Admin Areas- Asp.net Core Mvc*
 
-**Topics
+## Topics
 
 - N Tier Layers ( Data layer, Business Layer, Dto layer, Entity layer and WebApp layer)
 - EntityFramework 6
