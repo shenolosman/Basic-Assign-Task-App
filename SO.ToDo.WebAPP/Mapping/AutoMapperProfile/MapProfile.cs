@@ -51,6 +51,8 @@ namespace SO.ToDo.WebAPP.Mapping.AutoMapperProfile
             CreateMap<Rapport, RapportAddDto>();
             CreateMap<RapportUpdateDto, Rapport>();
             CreateMap<Rapport, RapportUpdateDto>();
+            CreateMap<RapportFileDto, Rapport>();
+            CreateMap<Rapport, RapportFileDto>();
             #endregion
         }
     }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SO.ToDo.BusinessLayer.Interfaces;
 using SO.ToDo.DTO.DTOs.AppUserDtos;
+using SO.ToDo.DTO.DTOs.RapportDtos;
 using SO.ToDo.DTO.DTOs.TaskDtos;
 using SO.ToDo.Entities.Concrete;
 using SO.ToDo.WebAPP.BaseController;
@@ -148,15 +149,16 @@ public class AssignmentController : BaseIdentityController
     public async Task<IActionResult> MakeExcel(int id)
     {
         var list = await _myTaskService.GetByReportId(id);
-        return File(await _fileService.ExportExcel(list.Rapports),
-            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", Guid.NewGuid() + ".xlsx");
+        return File(await _fileService.ExportExcel(_mapper.Map<List<RapportFileDto>>(list.Rapports)),
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "_" + Guid.NewGuid() + ".xlsx");
     }
 
     public async Task<IActionResult> MakePdf(int id)
     {
         var list = await _myTaskService.GetByReportId(id);
-        var path = _fileService.ExportPdf(list.Rapports);
+        //var path = _fileService.ExportPdf(list.Rapports);
+        var path = _fileService.ExportPdf(_mapper.Map<List<RapportFileDto>>(list.Rapports));
         return File(path,
-            "application/pdf", Guid.NewGuid() + ".pdf");
+            "application/pdf", DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "_" + Guid.NewGuid() + ".pdf");
     }
 }

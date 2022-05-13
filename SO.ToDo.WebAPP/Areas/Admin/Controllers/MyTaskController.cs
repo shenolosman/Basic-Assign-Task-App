@@ -62,6 +62,7 @@ namespace SO.ToDo.WebAPP.Areas.Admin.Controllers
                 });
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.States = new SelectList(_stateOfUrgentService.GetAll(), "Id", "Type");
             return View(model);
         }
         public IActionResult Edit(int id)

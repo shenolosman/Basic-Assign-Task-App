@@ -13,7 +13,7 @@
             {
                 var fileName = Path.GetFileNameWithoutExtension(imageFile.FileName).ToLower();
                 var extension = Path.GetExtension(imageFile.FileName).ToLower();
-                var imageName = DateTime.Now.ToString("yymmssfff") + fileName + extension;
+                var imageName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + fileName + extension;
 
                 //save new file
                 var filePath = Path.Combine(_hostEnvironment.WebRootPath + "/img/" + imageName);

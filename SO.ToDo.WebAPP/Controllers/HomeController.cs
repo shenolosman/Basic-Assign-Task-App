@@ -122,9 +122,9 @@ namespace SO.ToDo.WebAPP.Controllers
             return View();
         }
 
-        public void hata()
-        {
-            throw new Exception("bu bir hata");
-        }
+        //public void hata()
+        //{
+        //    throw new Exception("bu bir hata");
+        //}
     }
 }

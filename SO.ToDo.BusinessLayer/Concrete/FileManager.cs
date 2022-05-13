@@ -18,31 +18,49 @@ namespace SO.ToDo.BusinessLayer.Concrete
             dataTable.Load(ObjectReader.Create(list));
 
             //pdf files must saves first on the server then user can download not like Excel!
-            var fileName = Guid.NewGuid() + ".pdf";
+            var fileName = DateTime.Now.ToString("yyyy-MM-dd-HHmmss") + "_" + Guid.NewGuid() + ".pdf";
             var returnPath = "/documents/" + fileName;
             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/documents/" + fileName);
 
             var stream = new FileStream(path, FileMode.Create);
 
+            //Addin Arial font for PDF Export but if no arial font on computer gonna crash
+            var arialTtf = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Fonts), "arial.ttf");
+            BaseFont baseFont = BaseFont.CreateFont(arialTtf, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
+            Font font = new Font(baseFont, 12, Font.NORMAL);
+
             var document = new Document(PageSize.A4, 25f, 25f, 25f, 25f);
-            PdfWriter.GetInstance(document, stream);
-            document.Open();
-            PdfPTable pdfPTable = new PdfPTable(dataTable.Columns.Count);
-            for (var i = 0; i < dataTable.Columns.Count; i++)
+            try
             {
-                pdfPTable.AddCell(dataTable.Columns[i].ColumnName);
-            }
-
-            for (var i = 0; i < dataTable.Rows.Count; i++)
-            {
-                for (var j = 0; j < dataTable.Columns.Count; j++)
+                PdfWriter.GetInstance(document, stream);
+                document.Open();
+                PdfPTable pdfPTable = new PdfPTable(dataTable.Columns.Count);
+                for (var i = 0; i < dataTable.Columns.Count; i++)
                 {
-                    pdfPTable.AddCell(dataTable.Rows[i][j].ToString());
+                    pdfPTable.AddCell(new Phrase(dataTable.Columns[i].ColumnName, font));
                 }
-            }
 
-            document.Add(pdfPTable);
-            document.Close();
+                for (var i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    for (var j = 0; j < dataTable.Columns.Count; j++)
+                    {
+                        pdfPTable.AddCell(new Phrase(dataTable.Rows[i][j].ToString(), font));
+                    }
+                }
+                document.Add(pdfPTable);
+            }
+            catch (DocumentException dex)
+            {
+                throw (dex);
+            }
+            catch (IOException ioex)
+            {
+                throw (ioex);
+            }
+            finally
+            {
+                document.Close();
+            }
             return returnPath;
         }
 
