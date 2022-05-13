@@ -9,6 +9,7 @@
 - Bootstrap
 - Ajax Asynchronic parts
 - AspNet Identity Core
+- Google Pie Charts
 - AutoMapper
 - Pdf/Excel Export
 - Custom TagHelpers/Middleware/Routing/Filters/StatusCode
