@@ -12,4 +12,6 @@
 - Google Pie Charts
 - AutoMapper
 - Pdf/Excel Export
+- Pagination
+- Searching bar
 - Custom TagHelpers/Middleware/Routing/Filters/StatusCode
