@@ -15,3 +15,4 @@
 - Pagination
 - Searching bar
 - Custom TagHelpers/Middleware/Routing/Filters/StatusCode
+- User/Admin Sides
