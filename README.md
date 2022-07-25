@@ -17,6 +17,7 @@
 - Custom TagHelpers/Middleware/Routing/Filters/StatusCode
 - User/Admin Sides
 
+### For *Demo* click the [link](https://assign-tasking-application.azurewebsites.net/)
 
 Screenshots:
 
